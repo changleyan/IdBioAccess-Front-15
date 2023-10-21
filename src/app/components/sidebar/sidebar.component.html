@@ -10,14 +10,14 @@
       type="button"
       (click)="toggleCollapseShow('bg-white m-2 py-3 px-6')"
     >
-      <i class="fas fa-bars"></i>
+      <mat-icon>horizontal_split</mat-icon>
     </button>
     <!-- Brand -->
     <a
       [routerLink]="['/']"
-      class="md:block text-center md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+      class="md:block text-center md:pb-2 text-gray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
     >
-      <span class="hidden sm:block text-2xl text-gray-200"> IdBioAccess</span>
+      <span class="hidden sm:block text-2xl text-gray-700"> IdBioAccess</span>
       <ul class="flex-col list-none items-center hidden md:flex pt-2">
         <app-user-dropdown class="block"></app-user-dropdown>
       </ul>
@@ -38,13 +38,13 @@
     >
       <!-- Collapse header -->
       <div
-        class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200"
+        class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-gray-200"
       >
         <div class="flex flex-wrap">
           <div class="w-6/12">
             <a
               [routerLink]="['/']"
-              class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+              class="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
               IdBioAccess
             </a>
@@ -55,7 +55,7 @@
               class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
               (click)="toggleCollapseShow('hidden')"
             >
-              <i class="fas fa-times"></i>
+              <mat-icon>close</mat-icon>
             </button>
           </div>
         </div>
@@ -65,11 +65,11 @@
         <!-- Divider -->
         <hr class="my-4 md:min-w-full"/>
         <!-- Heading -->
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 no-underline"
+        <p
+          class="md:min-w-full text-gray-500 text-xs uppercase font-extrabold block pt-1 no-underline"
         >
           {{navigationItem.title}}
-        </h6>
+        </p>
         <!-- Navigation -->
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none pl-4">
@@ -81,13 +81,13 @@
             <a
               (click)="handleClickItem( navigationItem.title + ' ' + childrenItem.title)"
               [routerLink]="[childrenItem.link]"
-              class="text-xs uppercase py-3 font-bold block flex items-center gap-1"
+              class="text-xs uppercase py-3 font-bold block flex items-center gap-1 text-gray-800"
               routerLinkActive
               #adminDashboard="routerLinkActive"
               [ngClass]="
               adminDashboard.isActive
                 ? 'text-red-600 hover:text-red-700'
-                : 'text-blueGray-700 hover:text-blueGray-500'
+                : 'text-gray-700 hover:text-gray-500'
             "
             >
               <mat-icon>{{childrenItem.icon}}</mat-icon>
