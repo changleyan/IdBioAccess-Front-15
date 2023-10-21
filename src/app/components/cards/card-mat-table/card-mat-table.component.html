@@ -1,40 +1,44 @@
 <div
-  class="relative flex flex-col min-w-0 w-full mb-6 shadow-xl rounded"
+  class="relative flex flex-col min-w-0 w-full mb-6 shadow-xl rounded-lg"
 >
 
-  <div class="block w-full overflow-x-auto">
+  <div class="block w-full overflow-x-auto rounded-lg">
     <!-- Projects table -->
-    <div class="example-container mat-elevation-z8">
+    <div class="mat-elevation-z8">
+      <div class="bg-gray-100 pt-4 px-4 pb-2">
+        <p class="text-xs font-bold text-gray-700 uppercase">Resultados</p>
+      </div>
+      <hr>
       <mat-table #table [dataSource]="dataSource">
 
         <!-- Position Column -->
         <ng-container matColumnDef="position">
-          <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="weight">
-          <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Weight</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="symbol">
-          <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
-
+      <hr>
       <mat-paginator #paginator
                      [pageSize]="10"
                      [pageSizeOptions]="[5, 10, 20]"
@@ -43,102 +47,4 @@
     </div>
 
   </div>
-
-<!--  <div>-->
-<!--      <div class="responsive-section justify-between">-->
-<!--        <div class="text-2xl font-semibold p-3">Resultados</div>-->
-<!--      </div>-->
-
-<!--      <div class="hidden lg:block">-->
-<!--&lt;!&ndash;        <mat-progress-bar *ngIf="loading" mode="query"></mat-progress-bar>&ndash;&gt;-->
-
-<!--        <mat-table [dataSource]="sellers$" mat-table matSort>-->
-<!--          &lt;!&ndash; Video Column &ndash;&gt;-->
-<!--          <ng-container cdkColumnDef="ci">-->
-<!--            <mat-header-cell *cdkHeaderCellDef>Vendedor</mat-header-cell>-->
-<!--            <mat-cell *cdkCellDef="let element" mat-cell>-->
-<!--              <div class="flex flex-col">-->
-<!--                <span class="font-weight-bold">{{element.name}}</span>-->
-<!--                <span class="text-muted">{{element.ci}}</span>-->
-<!--                <span class="text-muted">{{element.email}}</span>-->
-<!--              </div>-->
-<!--            </mat-cell>-->
-<!--          </ng-container>-->
-
-<!--&lt;!&ndash;          &lt;!&ndash; Usuario Column &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;          <ng-container cdkColumnDef="active">&ndash;&gt;-->
-<!--&lt;!&ndash;            <mat-header-cell *cdkHeaderCellDef>Activo</mat-header-cell>&ndash;&gt;-->
-<!--&lt;!&ndash;            <mat-cell *cdkCellDef="let element" mat-cell>&ndash;&gt;-->
-<!--&lt;!&ndash;              <mat-slide-toggle (change)="toggleActive($event, element)" [checked]="element.active" color="primary">&ndash;&gt;-->
-<!--&lt;!&ndash;              </mat-slide-toggle>&ndash;&gt;-->
-<!--&lt;!&ndash;            </mat-cell>&ndash;&gt;-->
-<!--&lt;!&ndash;          </ng-container>&ndash;&gt;-->
-
-<!--          &lt;!&ndash; Name Column &ndash;&gt;-->
-<!--          <ng-container cdkColumnDef="type">-->
-<!--            <mat-header-cell *cdkHeaderCellDef mat-sort-header="nombre">Tipo</mat-header-cell>-->
-<!--            <mat-cell *cdkCellDef="let element" mat-cell>{{ element.type | titlecase }}</mat-cell>-->
-<!--          </ng-container>-->
-
-
-<!--          &lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--          <ng-container cdkColumnDef="address">-->
-<!--            <mat-header-cell *cdkHeaderCellDef>Dirección</mat-header-cell>-->
-<!--            <mat-cell *cdkCellDef="let element"-->
-<!--                      mat-cell>{{ element.address}}</mat-cell>-->
-<!--          </ng-container>-->
-
-<!--          &lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--          <ng-container cdkColumnDef="account">-->
-<!--            <mat-header-cell *cdkHeaderCellDef>Cuenta</mat-header-cell>-->
-<!--            <mat-cell *cdkCellDef="let element" mat-cell>-->
-
-<!--              {{element.account}}-->
-<!--            </mat-cell>-->
-<!--          </ng-container>-->
-<!--          <ng-container cdkColumnDef="joined">-->
-<!--            <mat-header-cell *cdkHeaderCellDef>Fecha</mat-header-cell>-->
-<!--            <mat-cell *cdkCellDef="let element" mat-cell>-->
-<!--              <div class="flex flex-col">-->
-<!--                <span class="font-weight-bold">{{element.joined| date: 'd/L/yyyy'}}</span>-->
-<!--                <span>{{element.joined| date: 'h:mm a'}}</span>-->
-<!--              </div>-->
-<!--            </mat-cell>-->
-<!--          </ng-container>-->
-
-<!--          <ng-container cdkColumnDef="operaciones">-->
-<!--            <mat-header-cell *cdkHeaderCellDef>Operaciones</mat-header-cell>-->
-<!--            <mat-cell *cdkCellDef="let element" mat-cell>-->
-<!--              <button [routerLink]="['edit', element.id]" mat-icon-button matTooltip="Editar Vendedor">-->
-<!--                <mat-icon>edit</mat-icon>-->
-<!--              </button>-->
-<!--              <button (click)="eliminarCanal(element.id)" color="warn" mat-icon-button matTooltip="Eliminar Vendedor">-->
-<!--                <mat-icon>delete</mat-icon>-->
-<!--              </button>-->
-<!--            </mat-cell>-->
-<!--          </ng-container>-->
-
-<!--          <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>-->
-<!--          <mat-row *cdkRowDef="let row; columns: displayedColumns" class="example-element-row"></mat-row>-->
-<!--        </mat-table>-->
-
-<!--        <mat-paginator [pageSizeOptions]="[10, 20, 50]" [pageSize]="params.limit"-->
-<!--                       showFirstLastButtons></mat-paginator>-->
-<!--      </div>-->
-<!--      <div class="block lg:hidden">-->
-<!--        <mat-progress-bar *ngIf="loading" mode="query"></mat-progress-bar>-->
-
-<!--        <mat-action-list>-->
-<!--          <mat-list-item (click)="openBottomSheet(seller)" *ngFor="let seller of sellers$ | async"-->
-<!--                         [class.hidden-video]="!seller.active" class="mat-card">-->
-<!--            <h3 class="font-weight-bold" matLine> {{seller.name}} </h3>-->
-<!--            <h3 class='text-muted' matLine> {{seller.ci}} </h3>-->
-<!--          </mat-list-item>-->
-<!--        </mat-action-list>-->
-<!--        <mat-paginator (page)="paginate($event)" [length]="totalCount" [pageSizeOptions]="[10, 30, 50, 75]"-->
-<!--                       [pageSize]="10"-->
-<!--                       showFirstLastButtons>-->
-<!--        </mat-paginator>-->
-<!--      </div>-->
-<!--  </div>-->
 </div>

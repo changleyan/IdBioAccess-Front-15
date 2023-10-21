@@ -21,7 +21,6 @@ export class CardFilterComponent implements OnInit {
   }
 
   handleParameterChange(): void {
-    console.log('lololo')
   }
 
 }
