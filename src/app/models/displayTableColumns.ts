@@ -2,13 +2,15 @@ export interface GenericDisplayTableColumns {
   headerName: string;
   dataKeyName: string;
   isIcon?: boolean;
-  iconData?: IconData;
+  iconData: IconData;
   tooltipMsg: string;
 }
 
 export interface IconData {
   icon: string;
   fns: (data: any) => void;
+  isModalFunction: boolean;
+  componentModal: any;
 }
 
 export interface TableButton {

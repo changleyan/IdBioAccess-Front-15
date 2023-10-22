@@ -1,7 +1,8 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
-import {GenericDisplayTableColumns, TableButton} from "@app/models/displayTableColumns";
+import {GenericDisplayTableColumns, IconData, TableButton} from "@app/models/displayTableColumns";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-card-mat-table',
@@ -20,7 +21,7 @@ export class CardMatTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -34,6 +35,18 @@ export class CardMatTableComponent implements OnInit, AfterViewInit {
     // Asocia el paginator a la tabla
     this.tableDataSource.paginator = this.paginator;
   }
+
+  handleClick(data: any, dataIcon: IconData): any {
+    return dataIcon.isModalFunction ? this.openDialog(data, dataIcon.componentModal) : dataIcon.fns(data);
+  }
+
+  openDialog(data: any, component: any) {
+    const dialogRef = this.dialog.open(component, {data: data});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
 
 }
 
