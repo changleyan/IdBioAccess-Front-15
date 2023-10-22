@@ -5,6 +5,7 @@ import {UsuariosRoutingModule} from './usuarios-routing.module';
 import {UserComponent} from './user/user.component';
 import {MaterialModule} from "@app/shared/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CardsModule} from "@components/cards/cards.module";
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    CardsModule
   ]
 })
 export class UsuariosModule {

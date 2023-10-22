@@ -14,6 +14,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSortModule} from "@angular/material/sort";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
+import {MatButtonModule} from "@angular/material/button";
 
 const materialToInclude = [
   MatSelectModule,
@@ -30,7 +31,8 @@ const materialToInclude = [
   MatCheckboxModule,
   MatFormFieldModule,
   MatPaginatorModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatButtonModule,
 ]
 
 @NgModule({

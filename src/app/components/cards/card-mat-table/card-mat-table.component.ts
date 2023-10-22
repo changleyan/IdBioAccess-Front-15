@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
-import {GenericDisplayTableColumns} from "@app/models/displayTableColumns";
+import {GenericDisplayTableColumns, TableButton} from "@app/models/displayTableColumns";
 
 @Component({
   selector: 'app-card-mat-table',
@@ -15,6 +15,7 @@ export class CardMatTableComponent implements OnInit, AfterViewInit {
   @Input() title: string = 'Resultados';
   @Input() dataSource!: any[];
   @Input() dataColum: GenericDisplayTableColumns[] = []
+  @Input() dataButton: TableButton = {show: false, tooltip: '', icon: 'add', onClickF: () => {}};
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
