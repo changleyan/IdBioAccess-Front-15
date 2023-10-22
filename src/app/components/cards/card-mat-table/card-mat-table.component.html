@@ -4,7 +4,7 @@
 
   <div class="block w-full overflow-x-auto rounded-lg">
     <div class="mat-elevation-z8">
-      <div class="bg-gray-100 pt-4 px-4 pb-2 flex justify-between items-center">
+      <div class="bg-gray-200 pt-4 px-4 pb-2 flex justify-between items-center">
         <p class="text-2xl font-bold text-gray-600 uppercase">{{title | uppercase}}</p>
         <div *ngIf="dataButton.show">
           <button mat-mini-fab color="primary"
@@ -20,7 +20,19 @@
 
         <ng-container *ngFor="let column of dataColum" [matColumnDef]="column.dataKeyName">
           <mat-header-cell *matHeaderCellDef> {{column.headerName | titlecase}}</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row[column.dataKeyName]}} </mat-cell>
+          <mat-cell *matCellDef="let row"
+                    [matTooltip]="column.tooltipMsg"
+                    matTooltipPosition="right">
+            <mat-icon *ngIf="column.isIcon; else textColumn"
+                        (click)="column.iconData?.fns(row)"
+                      class="hover:scale-125 hover:text-red-800 cursor-pointer">
+              {{column.iconData?.icon}}
+            </mat-icon>
+            <ng-template #textColumn>
+              {{row[column.dataKeyName]}}
+            </ng-template>
+
+          </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
