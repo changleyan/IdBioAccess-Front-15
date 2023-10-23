@@ -37,11 +37,11 @@ export class CardMatTableComponent implements OnInit, AfterViewInit {
   }
 
   handleClick(data: any, dataIcon: IconData): any {
-    return dataIcon.isModalFunction ? this.openDialog(data, dataIcon.componentModal) : dataIcon.fns(data);
+    return dataIcon.isModalFunction ? this.openDialog(data, dataIcon.componentModal, dataIcon.modalMetadata) : dataIcon.fns(data);
   }
 
-  openDialog(data: any, component: any) {
-    const dialogRef = this.dialog.open(component, {data: data});
+  openDialog(data: any, component: any, modalMetadata: any) {
+    const dialogRef = this.dialog.open(component, {...modalMetadata ,data: data});
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

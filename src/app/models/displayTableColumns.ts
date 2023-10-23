@@ -11,6 +11,7 @@ export interface IconData {
   fns: (data: any) => void;
   isModalFunction: boolean;
   componentModal: any;
+  modalMetadata: modalMetada
 }
 
 export interface TableButton {
@@ -18,6 +19,10 @@ export interface TableButton {
   tooltip: string;
   show: boolean;
   onClickF: () => void;
+}
+
+export interface modalMetada {
+  width: string;
 }
 
 export interface CiudadanoDisplay {

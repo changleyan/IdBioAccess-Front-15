@@ -7,6 +7,7 @@ import { CaptationComponent } from './captation/captation.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CaptureModalComponent } from './capture-modal/capture-modal.component';
 import {MaterialModule} from "@app/shared/material.module";
+import {WebcamModule} from "ngx-webcam";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {MaterialModule} from "@app/shared/material.module";
         CardsModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule
+        MaterialModule,
+        WebcamModule
     ],
 })
 export class ImagesModule { }

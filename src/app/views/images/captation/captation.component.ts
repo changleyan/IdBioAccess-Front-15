@@ -24,8 +24,12 @@ export class CaptationComponent {
     {
       headerName: 'Acción', dataKeyName: 'action', tooltipMsg: 'Capturar imagen',
       isIcon: true, iconData: {
-        icon: 'camera_alt', fns: () => {
-        }, isModalFunction: true, componentModal: CaptureModalComponent
+        icon: 'camera_alt',
+        fns: () => {
+        },
+        isModalFunction: true,
+        componentModal: CaptureModalComponent,
+        modalMetadata: {width: '80vw'}
       }
     },
   ];

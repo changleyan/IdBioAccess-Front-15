@@ -26,7 +26,7 @@
             <mat-icon *ngIf="column.isIcon; else textColumn"
                         (click)="handleClick(row, column.iconData)"
                       class="hover:scale-125 hover:text-red-800 cursor-pointer">
-              {{column.iconData?.icon}}
+              {{column.iconData.icon}}
             </mat-icon>
             <ng-template #textColumn>
               {{row[column.dataKeyName]}}
