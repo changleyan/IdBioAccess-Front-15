@@ -1,41 +1,70 @@
-<h2 mat-dialog-title>Capturar imagen</h2>
-<mat-dialog-content class="mat-typography">
-  <div>
-    <div>
-      <div>
-        <webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="mostrarWebcam"
+<div class="p-4 bg-gray-100">
+  <p class="text-center text-3xl font-bold text-gray-500">Capturar imagen</p>
+</div>
+<hr>
 
-                [switchCamera]="nextWebcamObservable"
+<mat-dialog-content class="mat-typography h-full max-h-[60vh]">
+  <div class="flex flex-col gap-3 items-center h-full">
+    <div class="flex w-full gap-8 justify-around pt-2 flex-col lg:flex-row">
+      <div class="text-center">
+        <h2>Cámara</h2>
+        <div class="w-full h-full lg:w-[30rem] lg:h-[20rem] 2xl:w-[35rem] 2xl:h-[25rem]">
+          <div class="w-full h-full object-cover">
+            <webcam [trigger]="triggerObservable"
+                    (imageCapture)="handleImage($event)"
+                    *ngIf="mostrarWebcam"
+                    [switchCamera]="nextWebcamObservable"
+                    [imageQuality]="1"
+                    (cameraSwitched)="cameraSwitched($event)"
+                    (initError)="handleInitError($event)"
+            ></webcam>
+          </div>
+        </div>
+      </div>
 
-                [imageQuality]="1"
-                (cameraSwitched)="cameraSwitched($event)"
-                (initError)="handleInitError($event)"
-        ></webcam>
-        <br/>
-        <button  class="btn btn-primary m-5" (click)="triggerCaptura();">Take A Snapshot</button>
-        <button  class="btn btn-primary m-5" (click)="toggleWebcam();">Toggle Webcam</button>
-        <br/>
-        <button  class="btn btn-primary m-5" (click)="showNextWebcam(true);" [disabled]="!multiplesCamarasDisponibles">Next Webcam</button>
-        <input id="cameraSwitchCheckbox" type="checkbox" [(ngModel)]="permitirCambioCamara"><label for="cameraSwitchCheckbox">Allow Camera Switch</label>
-        <br/>
-        dispositivoId: <input id="dispositivoId" type="text" [(ngModel)]="dispositivoId" style="width: 500px">
-        <button (click)="showNextWebcam(dispositivoId);"  class="btn btn-primary m-5">Activate</button>
+      <div class="flex md:flex-col gap-6 flex-row items-center h-full justify-center">
+        <button mat-mini-fab color="primary"
+                matTooltip="Capturar"
+                (click)="triggerCaptura()"
+        >
+          <mat-icon>camera_alt</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary"
+                matTooltip="Cambiar Webcam"
+                (click)="toggleWebcam()"
+        >
+          <mat-icon>shuffle</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary"
+                [disabled]="!multiplesCamarasDisponibles"
+                matTooltip="Siguiente Webcam"
+                (click)="showNextWebcam(true)"
+        >
+          <mat-icon>skip_next</mat-icon>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <h2>Imagen</h2>
+        <div class="w-full h-full lg:w-[30rem] lg:h-[20rem] 2xl:w-[35rem] 2xl:h-[25rem]">
+          <img class="w-full h-full object-cover" *ngIf="imagenWebcam; else base"
+               [src]="imagenWebcam.imageAsDataUrl"/>
+          <ng-template #base>
+            <img class="w-full h-full object-contain" src="./assets/OIP.png"/>
+          </ng-template>
+        </div>
       </div>
     </div>
 
-    <div class="snapshot" *ngIf="imagenWebcam">
-      <h2>Nice one!</h2>
-      <img [src]="imagenWebcam.imageAsDataUrl"/>
+    <div>
+      <h4 *ngIf="errors.length > 0">Messages:</h4>
+      <ul *ngFor="let error of errors">
+        <li>{{error | json}}</li>
+      </ul>
     </div>
-
-    <h4 *ngIf="errors.length > 0">Messages:</h4>
-    <ul *ngFor="let error of errors">
-      <li>{{error | json}}</li>
-    </ul>
-
   </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end" class="p-3">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  <button mat-button mat-raised-button [mat-dialog-close]="true" color="primary" cdkFocusInitial>Guardar</button>
 </mat-dialog-actions>

@@ -6,7 +6,8 @@ import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-card-mat-table',
-  templateUrl: './card-mat-table.component.html'
+  templateUrl: './card-mat-table.component.html',
+  styleUrls: ['./card-mat-table.component.scss']
 })
 export class CardMatTableComponent implements OnInit, AfterViewInit {
 
