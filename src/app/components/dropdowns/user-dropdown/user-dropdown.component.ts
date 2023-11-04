@@ -1,5 +1,8 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
 import { createPopper } from "@popperjs/core";
+import {AuthService} from "@app/services/auth.service";
+import {StorageService} from "@app/services/storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-user-dropdown",
@@ -10,6 +13,12 @@ export class UserDropdownComponent implements AfterViewInit {
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef!: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef!: ElementRef;
+
+  constructor(private authService: AuthService,
+              private router: Router,
+              private storageService: StorageService) {  }
+
+
   ngAfterViewInit() {
     createPopper(
       this.btnDropdownRef.nativeElement,
@@ -26,5 +35,11 @@ export class UserDropdownComponent implements AfterViewInit {
     } else {
       this.dropdownPopoverShow = true;
     }
+  }
+
+  handleLogout() {
+    this.authService.logout();
+    this.storageService.clean();
+    this.router.navigate(['/auth/login']);
   }
 }

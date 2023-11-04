@@ -5,6 +5,8 @@ import {AdminComponent} from "./layouts/admin/admin.component";
 import {DashboardComponent} from "@views/admin/dashboard/dashboard.component";
 import {SettingsComponent} from "@views/admin/settings/settings.component";
 import {TablesComponent} from "@views/admin/tables/tables.component";
+import {AuthComponent} from "@app/layouts/auth/auth.component";
+import {LoginComponent} from "@views/auth/login/login.component";
 
 
 const routes: Routes = [
@@ -41,6 +43,14 @@ const routes: Routes = [
         loadChildren: () => import('./views/images/images.module').then((m) => m.ImagesModule)
       },
       {path: "", redirectTo: "captacion", pathMatch: "full"},
+    ],
+  },
+  {
+    path: "auth",
+    component: AuthComponent,
+    children: [
+      { path: "login", component: LoginComponent },
+      { path: "", redirectTo: "login", pathMatch: "full" },
     ],
   },
 

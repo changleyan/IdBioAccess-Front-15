@@ -54,7 +54,7 @@ export const defaultNavigation: NavigationItem[] = [
   },
   {
     title: 'Auth Layout Pages',
-    hidden: true,
+    hidden: false,
     disabled: false,
     childrenItem: [
       {
@@ -63,7 +63,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'fas fa-fingerprint',
-        link: '/admin/login'
+        link: '/auth/login'
       }
     ],
   },

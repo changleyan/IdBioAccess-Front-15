@@ -22,6 +22,8 @@ import {ComponentsModule} from "@components/components.module";
 import {AdminComponent} from "@app/layouts/admin/admin.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {httpInterceptorProviders} from "@app/_helpers/http.interceptor";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -40,11 +42,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     BrowserModule,
     AppRoutingModule,
     ComponentsModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {
