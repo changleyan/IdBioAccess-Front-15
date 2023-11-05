@@ -3,7 +3,6 @@ import {Group} from "@app/components/security/seguridad/models/group";
 import {Permission} from "@app/components/security/seguridad/models/permission";
 import {MatSelectionList} from "@angular/material/list";
 import {FormControl} from "@angular/forms";
-// import {GroupService} from "@app/services/services/group.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {PermissionService} from "@app/services/services/permission.service";
@@ -23,7 +22,7 @@ export class SeguridadComponent implements OnInit {
   permissions!: Permission[];
   selectedPermissions: any;
   selectedGroup!: Group;
-  selectedIndex = 0;
+  selectedIndex = 1;
   @ViewChild('permissionsSelected') permissionsSelected!: MatSelectionList;
   filteredPermissions!: Permission[];
   permissionFilterControl = new FormControl('');
@@ -57,14 +56,12 @@ export class SeguridadComponent implements OnInit {
           this.selectedGroup = this.groups[index];
           this.selectedPermissions = this.selectedGroup.permissions.map(p => p.id);
           this.changed = false;
-          //console.log(this.selectedPermissions);
         }
       });
     } else {
       this.selectedIndex = index;
       this.selectedGroup = this.groups[index];
       this.selectedPermissions = this.selectedGroup.permissions.map(p => p.id);
-      console.log(this.selectedPermissions);
     }
 
   }
@@ -82,19 +79,19 @@ export class SeguridadComponent implements OnInit {
         }
       });
       dialogRef.afterClosed().subscribe(result => {
-        // if (result) {
-        //   this.groupService.update({id: this.selectedGroup.id, permissions: this.selectedPermissions}).subscribe(
-        //     () => {
-        //       this.snackBar.open('Cambios guardados correctamente.');
-        //       this.loadGroups();
-        //       this.changed = false;
-        //     },
-        //     () => {
-        //       this.snackBar.open('Error al guardar los cambios.');
-        //       this.changed = false;
-        //     }
-        //   );
-        // }
+        if (result) {
+          this.groupService.update({id: this.selectedGroup.id, permissions: this.selectedPermissions}).subscribe(
+            () => {
+              this.snackBar.open('Cambios guardados correctamente.');
+              this.loadGroups();
+              this.changed = false;
+            },
+            () => {
+              this.snackBar.open('Error al guardar los cambios.');
+              this.changed = false;
+            }
+          );
+        }
       });
     }
   }
@@ -103,12 +100,12 @@ export class SeguridadComponent implements OnInit {
     const ref = this.dialog.open(GroupFormComponent);
     ref.afterClosed().subscribe(result => {
       if (result) {
-        // this.groupService.create(result).subscribe(created => {
-        //   this.snackBar.open('Grupo creado correctamente.');
-        //
-        //   this.loadGroups();
-        //
-        // });
+        this.groupService.create(result).subscribe(created => {
+          this.snackBar.open('Grupo creado correctamente.');
+
+          this.loadGroups();
+
+        });
       }
     });
   }
@@ -128,6 +125,7 @@ export class SeguridadComponent implements OnInit {
       this.groups = data.results;
       this.selectedGroup = this.groups[0];
       this.selectedPermissions = this.selectedGroup.permissions.map(p => p.id);
+      this.selectedIndex = 0;
     });
   }
 
@@ -173,17 +171,17 @@ export class SeguridadComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      // if (result) {
-      //   this.groupService.delete(group.id).subscribe(
-      //     () => {
-      //       this.snackBar.open('Grupo eliminado correctamente.');
-      //       this.loadGroups();
-      //     },
-      //     () => {
-      //       this.snackBar.open('Error al eliminar el grupo.');
-      //     }
-      //   );
-      // }
+      if (result) {
+        this.groupService.delete(group.id).subscribe(
+          () => {
+            this.snackBar.open('Grupo eliminado correctamente.');
+            this.loadGroups();
+          },
+          () => {
+            this.snackBar.open('Error al eliminar el grupo.');
+          }
+        );
+      }
     });
   }
 
