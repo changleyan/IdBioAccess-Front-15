@@ -141,7 +141,7 @@ export class SeguridadComponent implements OnInit {
       debounceTime(500)
     ).subscribe((value: string | null) => {
       if (value) {
-        this.filteredPermissions = this.permissions.filter(p => p.nombre.toLowerCase().includes(value.toLowerCase()));
+        this.filteredPermissions = this.permissions.filter(p => p.name.toLowerCase().includes(value.toLowerCase()));
       } else {
         this.filteredPermissions = this.permissions;
       }
