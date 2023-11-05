@@ -3,10 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {UtilesService} from "@app/services/utiles.service";
 import {Group} from "@app/components/security/seguridad/models/group";
 import {PictaResponse} from "@app/models/response.picta.model";
-import {baseUrl} from "@app/app.config";
+import {BASE_API} from "@env/environment";
 
 
-const URL = `${baseUrl}/grupo/`;
+const URL = `${BASE_API}/group/`;
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +26,14 @@ export class GroupService {
     });
   }
 
+
+  // @ts-ignore
   update({id, permissions}) {
     const body = this.utilService.getBody({permissions});
     return this.httpClient.patch(`${URL}${id}/`, body);
   }
 
-  create(data) {
+  create(data: any) {
     const body = this.utilService.getBody(data);
     return this.httpClient.post(`${URL}`, body);
 

@@ -10,6 +10,7 @@ import {PermissionService} from "@app/services/services/permission.service";
 import {ConfirmDialogComponent} from "@app/components/confirm-dialog/confirm-dialog.component";
 import {GroupFormComponent} from "@app/components/security/group-form/group-form.component";
 import {debounceTime} from "rxjs/operators";
+import {GroupService} from "@app/services/services/group.service";
 
 @Component({
   selector: 'app-seguridad',
@@ -29,10 +30,11 @@ export class SeguridadComponent implements OnInit {
   changed = false;
 
   constructor(
-    // private groupService: GroupService,
-              private dialog: MatDialog,
-              private snackBar: MatSnackBar,
-              private permissionService: PermissionService) { }
+    private groupService: GroupService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private permissionService: PermissionService) {
+  }
 
 
   ngOnInit(): void {
@@ -122,11 +124,11 @@ export class SeguridadComponent implements OnInit {
   }
 
   private loadGroups() {
-    // this.groupService.getAll().subscribe(data => {
-    //   this.groups = data.results;
-    //   this.selectedGroup = this.groups[0];
-    //   this.selectedPermissions = this.selectedGroup.permissions.map(p => p.id);
-    // });
+    this.groupService.getAll().subscribe(data => {
+      this.groups = data.results;
+      this.selectedGroup = this.groups[0];
+      this.selectedPermissions = this.selectedGroup.permissions.map(p => p.id);
+    });
   }
 
   private loadPermissions() {

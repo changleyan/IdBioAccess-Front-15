@@ -11,6 +11,19 @@ export interface UserLogin {
   isActive:  boolean;
   email:     string;
   ci:        null;
+  groups:    Group[];
+}
+
+export interface Group {
+  id:          number;
+  name:        string;
+  permissions: Permission[];
+}
+
+export interface Permission {
+  id:       number;
+  name:     string;
+  codename: string;
 }
 
 
@@ -31,9 +44,4 @@ export interface User {
   created:         Date;
   updated:         Date;
   ci:              null;
-}
-
-export interface Group {
-  id:   number;
-  name: string;
 }
