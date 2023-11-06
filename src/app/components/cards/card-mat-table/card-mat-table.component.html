@@ -23,11 +23,14 @@
           <mat-cell *matCellDef="let row"
                     [matTooltip]="column.tooltipMsg"
                     matTooltipPosition="right">
-            <mat-icon *ngIf="column.isIcon; else textColumn"
-                        (click)="handleClick(row, column.iconData)"
-                      class="hover:scale-125 hover:text-red-800 cursor-pointer">
-              {{column.iconData.icon}}
-            </mat-icon>
+            <div *ngIf="column.isIcon; else textColumn">
+              <mat-icon *ngFor="let actions of column.iconData"
+                        (click)="handleClick(row, actions)"
+                        [matTooltip]="actions.tooltipMsg"
+                        class="hover:scale-125 hover:text-red-800 cursor-pointer ml-1">
+                {{actions.icon}}
+              </mat-icon>
+            </div>
             <ng-template #textColumn>
               {{row[column.dataKeyName]}}
             </ng-template>

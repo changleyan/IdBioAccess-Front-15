@@ -1,10 +1,10 @@
 <div class="pb-3">
 
-<!--  <app-card-mat-table-->
-<!--    [dataSource]="elemtData"-->
-<!--    [dataColum]="dataTest"-->
-<!--    [dataButton]="dataButton"-->
-<!--    title="Usuarios"-->
-<!--  ></app-card-mat-table>-->
+  <app-card-mat-table *ngIf="!isLoading"
+    [dataSource]="elemtData"
+    [dataColum]="dataTest"
+    [dataButton]="dataButton"
+    title="Usuarios"
+  ></app-card-mat-table>
 </div>
 

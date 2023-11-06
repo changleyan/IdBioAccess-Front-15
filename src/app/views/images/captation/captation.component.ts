@@ -13,24 +13,25 @@ export class CaptationComponent {
 
 
   dataTest: GenericDisplayTableColumns[] = [
-    {headerName: 'No. Carné', dataKeyName: 'ci', tooltipMsg: '', iconData: iconModel},
-    {headerName: 'Nombres', dataKeyName: 'name', tooltipMsg: '', iconData: iconModel},
-    {headerName: 'Apellidos', dataKeyName: 'apellidos', tooltipMsg: '', iconData: iconModel},
-    {headerName: 'Fecha Nacimiento', dataKeyName: 'date', tooltipMsg: '', iconData: iconModel},
-    {headerName: 'Sexo', dataKeyName: 'sexo', tooltipMsg: '', iconData: iconModel},
-    {headerName: 'Rol Universitario', dataKeyName: 'rol', tooltipMsg: '', iconData: iconModel},
-    {headerName: 'Área', dataKeyName: 'area', tooltipMsg: '', iconData: iconModel},
-    {headerName: 'Residente', dataKeyName: 'residente', tooltipMsg: '', iconData: iconModel},
+    {headerName: 'No. Carné', dataKeyName: 'ci', tooltipMsg: '', iconData: [iconModel]},
+    {headerName: 'Nombres', dataKeyName: 'name', tooltipMsg: '', iconData: [iconModel]},
+    {headerName: 'Apellidos', dataKeyName: 'apellidos', tooltipMsg: '', iconData: [iconModel]},
+    {headerName: 'Fecha Nacimiento', dataKeyName: 'date', tooltipMsg: '', iconData: [iconModel]},
+    {headerName: 'Sexo', dataKeyName: 'sexo', tooltipMsg: '', iconData: [iconModel]},
+    {headerName: 'Rol Universitario', dataKeyName: 'rol', tooltipMsg: '', iconData: [iconModel]},
+    {headerName: 'Área', dataKeyName: 'area', tooltipMsg: '', iconData: [iconModel]},
+    {headerName: 'Residente', dataKeyName: 'residente', tooltipMsg: '', iconData: [iconModel]},
     {
       headerName: 'Acción', dataKeyName: 'action', tooltipMsg: 'Capturar imagen',
-      isIcon: true, iconData: {
+      isIcon: true, iconData: [{
         icon: 'camera_alt',
         fns: () => {
         },
         isModalFunction: true,
         componentModal: CaptureModalComponent,
-        modalMetadata: {width: '80vw'}
-      }
+        modalMetadata: {width: '80vw'},
+        tooltipMsg: ''
+      }]
     },
   ];
 

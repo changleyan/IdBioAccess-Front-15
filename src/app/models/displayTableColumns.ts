@@ -2,7 +2,7 @@ export interface GenericDisplayTableColumns {
   headerName: string;
   dataKeyName: string;
   isIcon?: boolean;
-  iconData: IconData;
+  iconData: IconData[];
   tooltipMsg: string;
 }
 
@@ -11,7 +11,8 @@ export interface IconData {
   fns: (data: any) => void;
   isModalFunction: boolean;
   componentModal: any;
-  modalMetadata: modalMetada
+  modalMetadata: modalMetada,
+  tooltipMsg: string;
 }
 
 export interface TableButton {
@@ -42,3 +43,14 @@ export interface Element {
   symbol: string;
 }
 
+export interface UserDisplay {
+  id:              number;
+  email:           string;
+  username:        string;
+  isSuperuser:     boolean;
+  firstName:       string;
+  lastName:        string;
+  isStaff:         boolean;
+  isActive:        boolean;
+  ci:              null | string;
+}
