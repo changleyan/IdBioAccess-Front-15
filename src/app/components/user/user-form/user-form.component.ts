@@ -21,6 +21,7 @@ export class UserFormComponent implements OnInit {
   grupos!: any[];
 
   isEdit = false;
+  isChangePassword = false;
 
   constructor(
     private userService: UserService,
@@ -32,6 +33,7 @@ export class UserFormComponent implements OnInit {
   ) {
     this.loadGroups();
     this.isEdit = this.data ? true : false;
+    this.isChangePassword = (this.data?.action && this.data?.action === 'changePassword') ? true : false;
   }
 
   ngOnInit() {
@@ -53,10 +55,19 @@ export class UserFormComponent implements OnInit {
   }
 
   private fillForm() {
-    this.userForm.patchValue(this.data);
-    this.userForm.get('password')?.disable();
-    this.userForm.get('repeat_password')?.disable();
-    this.userForm.get('groups')?.setValue([...this.data?.groups.map((g: any) => g.id)]);
+    if (this.isChangePassword) {
+      this.userForm.get('username')?.disable();
+      this.userForm.get('first_name')?.disable();
+      this.userForm.get('last_name')?.disable();
+      this.userForm.get('ci')?.disable();
+      this.userForm.get('email')?.disable();
+      this.userForm.get('groups')?.disable();
+    } else {
+      this.userForm.patchValue(this.data);
+      this.userForm.get('password')?.disable();
+      this.userForm.get('repeat_password')?.disable();
+      this.userForm.get('groups')?.setValue([...this.data?.groups.map((g: any) => g.id)]);
+    }
   }
 
   private loadGroups() {
@@ -68,7 +79,7 @@ export class UserFormComponent implements OnInit {
   handleSubmit(){
     if (this.userForm.valid) {
       if (this.isEdit) {
-        this.updateUser();
+        this.isChangePassword ? this.updatePassword() : this.updateUser();
       } else {
         this.createUser();
       }
@@ -79,7 +90,7 @@ export class UserFormComponent implements OnInit {
     const body = {...this.userForm.value, groups: this.userForm.get('groups')?.value.toString()};
     this.userService.create(body).subscribe(
       () => {
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       },
       (error) => {
         if (error instanceof HttpErrorResponse && error.status === 400) {
@@ -101,7 +112,7 @@ export class UserFormComponent implements OnInit {
     body = body?.groups ? {...body, groups: this.userForm.get('groups')?.value.toString()} : body;
     this.userService.edit(this.data?.id, body).subscribe(
       () => {
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       },
       (error) => {
         if (error instanceof HttpErrorResponse && error.status === 400) {
@@ -111,6 +122,26 @@ export class UserFormComponent implements OnInit {
         } else {
           console.error('Error al editar usuario:', error);
           this.openErrorDialog('Error al editar usuario', 'Ocurrió un error inesperado.');
+        }
+
+      }
+    );
+  }
+
+  updatePassword() {
+    const body = this.userService.getDirtyValues(this.userForm);
+    this.userService.edit(this.data?.id, body).subscribe(
+      () => {
+        this.dialogRef.close(true);
+      },
+      (error) => {
+        if (error instanceof HttpErrorResponse && error.status === 400) {
+          // Maneja los errores personalizados del API
+          const errorResponse = error.error;
+          this.handleApiErrors(errorResponse);
+        } else {
+          console.error('Error al cambiar la contraseña del usuario:', error);
+          this.openErrorDialog('Error al cambiar la contraseña del usuario', 'Ocurrió un error inesperado.');
         }
 
       }

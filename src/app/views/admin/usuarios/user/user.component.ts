@@ -33,6 +33,13 @@ export class UserComponent implements OnInit, AfterViewInit {
       isIcon: true,
       iconData: [{
         ...iconModel,
+        icon: 'vpn_key',
+        isModalFunction: true,
+        componentModal: UserFormComponent,
+        modalMetadata: {...iconModel.modalMetadata, width: '80vw', data: {action: 'changePassword'}},
+        tooltipMsg: 'Cambiar contraseña'
+      },{
+        ...iconModel,
         icon: 'edit',
         isModalFunction: true,
         componentModal: UserFormComponent,
@@ -99,15 +106,19 @@ export class UserComponent implements OnInit, AfterViewInit {
   handleActionObservable(evento: EventAction) {
     switch (evento.action) {
       case 'add':
-        this.createUser(evento);
+        this.genericResponse(evento, 'Usuario creado correctamente.');
         break;
       case 'delete':
         this.deleteUser(evento);
         break;
       case 'edit':
-        this.editUser(evento);
+        this.genericResponse(evento, 'Usuario editado correctamente.');
+        break;
+      case 'vpn_key':
+        this.genericResponse(evento, 'Contraseña cambiada correctamente.');
         break;
       default:
+        this.genericResponse(evento, 'Acción no reconocida');
         console.log('Acción no reconocida:', evento.action);
     }
   }
@@ -132,18 +143,14 @@ export class UserComponent implements OnInit, AfterViewInit {
     }
   }
 
-  createUser(evento: EventAction) {
-    this.getUser();
-    this.snackBar.open('Usuario creado correctamente.', 'Cerrar', {
-      duration: 5000
-    });
-  }
+  genericResponse(evento: EventAction, msg: string = '') {
+    if (evento.data?.data) {
+      this.getUser();
+      this.snackBar.open(msg, 'Cerrar', {
+        duration: 5000
+      });
+    }
 
-  editUser(evento: EventAction) {
-    this.getUser();
-    this.snackBar.open('Usuario editado correctamente.', 'Cerrar', {
-      duration: 5000
-    });
   }
 
 }

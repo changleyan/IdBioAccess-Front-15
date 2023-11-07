@@ -8,7 +8,8 @@
       <form (ngSubmit)="handleSubmit()" *ngIf="userForm" [formGroup]="userForm">
         <div class="form-row">
           <div class="w-full grid grid-cols-1 gap-4 md:grid-cols-2">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline"
+                            *ngIf="!userForm.get('first_name')?.disabled">
               <mat-label>Nombre:</mat-label>
               <input formControlName="first_name" matInput required type="text">
               <mat-error
@@ -17,7 +18,8 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline"
+                            *ngIf="!userForm.get('last_name')?.disabled">
               <mat-label>Apellidos:</mat-label>
               <input formControlName="last_name" matInput required type="text">
               <mat-error
@@ -26,7 +28,8 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline"
+                            *ngIf="!userForm.get('username')?.disabled">
               <mat-label>Usuario:</mat-label>
               <input formControlName="username" matInput required type="text">
               <mat-error
@@ -35,7 +38,8 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline"
+                            *ngIf="!userForm.get('ci')?.disabled">
               <mat-label>Carnet:</mat-label>
               <input formControlName="ci" matInput required type="text">
               <mat-error
@@ -53,6 +57,7 @@
                 La contraseña es requerida.
               </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline"
                             *ngIf="!userForm.get('repeat_password')?.disabled">
               <mat-label>Repetir Contraseña:</mat-label>
@@ -62,7 +67,9 @@
               </mat-error>
 
             </mat-form-field>
-            <mat-form-field appearance="outline">
+
+            <mat-form-field appearance="outline"
+                            *ngIf="!userForm.get('email')?.disabled">
               <mat-label>Correo Electrónico:</mat-label>
               <input formControlName="email" matInput type="text">
               <mat-error
@@ -71,7 +78,8 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline"
+                            *ngIf="!userForm.get('groups')?.disabled">
               <mat-label>Grupos</mat-label>
               <mat-select formControlName="groups" multiple required>
                 <mat-option *ngFor="let grupo of grupos" [value]="grupo.id">{{grupo.name}}</mat-option>
@@ -88,9 +96,7 @@
           <button color="primary" mat-raised-button type="submit"
                   [disabled]="userForm.invalid">Guardar</button>
         </div>
-
       </form>
     </div>
-
   </ng-container>
 </div>
