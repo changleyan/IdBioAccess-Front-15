@@ -34,18 +34,14 @@ export class UserComponent implements OnInit, AfterViewInit {
       iconData: [{
         ...iconModel,
         icon: 'edit',
-        fns: () => {
-        },
         isModalFunction: true,
-        componentModal: CaptureModalComponent,
+        componentModal: UserFormComponent,
         modalMetadata: {...iconModel.modalMetadata, width: '80vw'},
         tooltipMsg: 'Editar usuario'
       },
         {
           ...iconModel,
           icon: 'delete',
-          fns: () => {
-          },
           isModalFunction: true,
           componentModal: ConfirmDialogComponent,
           modalMetadata: {width: '25vw', data: {title: 'Eliminar usuario', msg: '¿Desea eliminar el usuario?'}},
@@ -97,12 +93,10 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   handleEvent(event: any) {
-    console.log(event);
     this.actionSubject.next(JSON.parse(event));
   }
 
   handleActionObservable(evento: EventAction) {
-    console.log(evento);
     switch (evento.action) {
       case 'add':
         this.createUser(evento);
@@ -146,7 +140,10 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   editUser(evento: EventAction) {
-
+    this.getUser();
+    this.snackBar.open('Usuario editado correctamente.', 'Cerrar', {
+      duration: 5000
+    });
   }
 
 }

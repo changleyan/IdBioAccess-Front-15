@@ -54,7 +54,7 @@ const routes: Routes = [
     ],
   },
 
-  {path: "", redirectTo: "admin/dashboard", pathMatch: "full"},
+  {path: "", redirectTo: "auth/login", pathMatch: "full"},
   {path: "**", redirectTo: "", pathMatch: "full"},
 ];
 

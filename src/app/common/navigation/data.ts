@@ -91,7 +91,7 @@ export const defaultNavigation: NavigationItem[] = [
   },
   {
     title: 'General',
-    hidden: false,
+    hidden: true,
     disabled: false,
     childrenItem: [
       {

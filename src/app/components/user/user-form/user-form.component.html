@@ -5,7 +5,7 @@
   </div>
   <ng-container content>
     <div class="form-container">
-      <form (ngSubmit)="createUser()" *ngIf="userForm" [formGroup]="userForm">
+      <form (ngSubmit)="handleSubmit()" *ngIf="userForm" [formGroup]="userForm">
         <div class="form-row">
           <div class="w-full grid grid-cols-1 gap-4 md:grid-cols-2">
             <mat-form-field appearance="outline">
@@ -44,7 +44,8 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline"
+                            *ngIf="!userForm.get('password')?.disabled">
               <mat-label>Contraseña:</mat-label>
               <input formControlName="password" matInput required type="password">
               <mat-error
@@ -52,7 +53,8 @@
                 La contraseña es requerida.
               </mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline"
+                            *ngIf="!userForm.get('repeat_password')?.disabled">
               <mat-label>Repetir Contraseña:</mat-label>
               <input formControlName="repeat_password" matInput required type="password">
               <mat-error *ngIf="userForm.get('repeat_password')?.hasError('NoPassswordMatch')"> Las contraseñas deben

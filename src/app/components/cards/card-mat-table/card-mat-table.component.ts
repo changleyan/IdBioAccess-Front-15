@@ -72,7 +72,6 @@ export class CardMatTableComponent implements OnChanges, OnInit, AfterViewInit {
     modalMetadata.data = {...modalMetadata.data, ...data};
     const dialogRef = this.dialog.open(component, {...modalMetadata});
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       this.emitEvento({action, data: {id: data?.id, data:result} })
     });
   }
