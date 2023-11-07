@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="flex md:flex-col gap-6 flex-row items-center h-full justify-center">
+      <div class="flex md:flex-col gap-6 flex-row items-center justify-center">
         <button mat-mini-fab color="primary"
                 matTooltip="Capturar"
                 (click)="triggerCaptura()"
@@ -35,13 +35,13 @@
 <!--        >-->
 <!--          <mat-icon>shuffle</mat-icon>-->
 <!--        </button>-->
-<!--        <button mat-mini-fab color="primary"-->
-<!--                [disabled]="!multiplesCamarasDisponibles"-->
-<!--                matTooltip="Siguiente Webcam"-->
-<!--                (click)="showNextWebcam(true)"-->
-<!--        >-->
-<!--          <mat-icon>skip_next</mat-icon>-->
-<!--        </button>-->
+        <button mat-mini-fab color="primary"
+                [disabled]="!multiplesCamarasDisponibles"
+                matTooltip="Siguiente Webcam"
+                (click)="showNextWebcam(true)"
+        >
+          <mat-icon>skip_next</mat-icon>
+        </button>
       </div>
 
       <div class="text-center">
@@ -65,6 +65,6 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end" class="p-3">
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close class="mr-3" color="warn">Cancelar</button>
   <button mat-button mat-raised-button [mat-dialog-close]="true" color="primary" cdkFocusInitial>Guardar</button>
 </mat-dialog-actions>

@@ -12,6 +12,9 @@ import {FootersModule} from "./footers/footers.module";
 import {DropdownsModule} from "./dropdowns/dropdowns.module";
 import {SharedModule} from "@app/shared/shared.module";
 import {AppRoutingModule} from "@app/app-routing.module";
+import { UserFormComponent } from './user/user-form/user-form.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { ErrorDialogComponent } from './dialog/dialog.component';
 
 const sharedComponents = [
   ConfirmDialogComponent,
@@ -25,7 +28,9 @@ const sharedComponents = [
 
 @NgModule({
   declarations: [
-    sharedComponents
+    sharedComponents,
+    UserFormComponent,
+    ErrorDialogComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +40,7 @@ const sharedComponents = [
     DropdownsModule,
     SharedModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CardsModule,

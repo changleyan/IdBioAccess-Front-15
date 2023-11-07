@@ -23,7 +23,7 @@ export class CaptationComponent {
     {headerName: 'Residente', dataKeyName: 'residente', tooltipMsg: '', iconData: [iconModel]},
     {
       headerName: 'Acción', dataKeyName: 'action', tooltipMsg: 'Capturar imagen',
-      isIcon: true, iconData: [{
+      isIcon: true, iconData: [{...iconModel,
         icon: 'camera_alt',
         fns: () => {
         },

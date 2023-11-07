@@ -1,0 +1,94 @@
+<div class="w-full p-4">
+  <div class="w-full mb-5">
+    <p class="font-bold text-2xl text-gray-800 text-center">Adicionar Usuario</p>
+    <hr>
+  </div>
+  <ng-container content>
+    <div class="form-container">
+      <form (ngSubmit)="createUser()" *ngIf="userForm" [formGroup]="userForm">
+        <div class="form-row">
+          <div class="w-full grid grid-cols-1 gap-4 md:grid-cols-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre:</mat-label>
+              <input formControlName="first_name" matInput required type="text">
+              <mat-error
+                *ngIf="userForm.get('first_name')?.hasError('required') &&userForm.get('first_name')?.touched">
+                El nombre es requerido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Apellidos:</mat-label>
+              <input formControlName="last_name" matInput required type="text">
+              <mat-error
+                *ngIf="userForm.get('last_name')?.hasError('required') &&userForm.get('last_name')?.touched">
+                El apellido es requerido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Usuario:</mat-label>
+              <input formControlName="username" matInput required type="text">
+              <mat-error
+                *ngIf="userForm.get('username')?.hasError('required') &&userForm.get('username')?.touched">
+                El usuario es requerido.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Carnet:</mat-label>
+              <input formControlName="ci" matInput required type="text">
+              <mat-error
+                *ngIf="userForm.get('ci')?.hasError('required') &&userForm.get('ci')?.touched">
+                El carnet es requerido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Contraseña:</mat-label>
+              <input formControlName="password" matInput required type="password">
+              <mat-error
+                *ngIf="userForm.get('password')?.hasError('required') &&userForm.get('password')?.touched">
+                La contraseña es requerida.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Repetir Contraseña:</mat-label>
+              <input formControlName="repeat_password" matInput required type="password">
+              <mat-error *ngIf="userForm.get('repeat_password')?.hasError('NoPassswordMatch')"> Las contraseñas deben
+                coincidir
+              </mat-error>
+
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Correo Electrónico:</mat-label>
+              <input formControlName="email" matInput type="text">
+              <mat-error
+                *ngIf="userForm.get('email')?.hasError('required') &&userForm.get('email')?.touched">
+                El correo electrónico es requerido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Grupos</mat-label>
+              <mat-select formControlName="groups" multiple required>
+                <mat-option *ngFor="let grupo of grupos" [value]="grupo.id">{{grupo.name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="userForm.get('groups')?.hasError('required')">Debe asignar al menos un rol.</mat-error>
+
+            </mat-form-field>
+
+
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <button mat-button mat-dialog-close class="mr-3" color="warn">Cancelar</button>
+          <button color="primary" mat-raised-button type="submit"
+                  [disabled]="userForm.invalid">Guardar</button>
+        </div>
+
+      </form>
+    </div>
+
+  </ng-container>
+</div>

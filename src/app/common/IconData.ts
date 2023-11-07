@@ -7,7 +7,8 @@ const iconModel: IconData = {
   isModalFunction: false,
   componentModal: '',
   modalMetadata: {width: '100%'},
-  tooltipMsg: ''
+  tooltipMsg: '',
+  show: false
 }
 
 export default iconModel;

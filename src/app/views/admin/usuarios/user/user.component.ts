@@ -1,15 +1,13 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {
-  CiudadanoDisplay,
-  Element,
-  GenericDisplayTableColumns,
-  TableButton,
+  GenericDisplayTableColumns, IconData,
   UserDisplay
 } from "@app/models/displayTableColumns";
 import iconModel from "@app/common/IconData";
 import {CaptureModalComponent} from "@views/images/capture-modal/capture-modal.component";
 import {UserService} from "@app/services/user.service";
 import {tap} from "rxjs";
+import {UserFormComponent} from "@components/user/user-form/user-form.component";
 
 @Component({
   selector: 'app-user',
@@ -26,34 +24,34 @@ export class UserComponent implements OnInit, AfterViewInit {
       headerName: 'Operaciones', dataKeyName: 'action1', tooltipMsg: '',
       isIcon: true,
       iconData: [{
+        ...iconModel,
         icon: 'edit',
         fns: () => {
         },
         isModalFunction: true,
         componentModal: CaptureModalComponent,
         modalMetadata: {width: '80vw'},
-        tooltipMsg: 'toto'
+        tooltipMsg: 'Editar usuario'
       },
         {
+          ...iconModel,
           icon: 'delete',
           fns: () => {
           },
           isModalFunction: true,
           componentModal: CaptureModalComponent,
           modalMetadata: {width: '80vw'},
-          tooltipMsg: 'toto2'
+          tooltipMsg: 'Eliminar usuario'
         }]
     }
   ];
 
   elemtData: UserDisplay[] = [];
 
-  dataButton: TableButton = {
-    show: true,
-    tooltip: 'Crear usuario',
-    icon: 'add',
-    onClickF: this.addUser
-  }
+  dataButton: IconData = {
+    ...iconModel, tooltipMsg: 'Crear usuario', icon: 'add',
+    isModalFunction: true, show: true, componentModal: UserFormComponent
+  };
 
   isLoading = true;
 

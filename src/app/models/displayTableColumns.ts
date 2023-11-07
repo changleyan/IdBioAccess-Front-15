@@ -13,6 +13,7 @@ export interface IconData {
   componentModal: any;
   modalMetadata: modalMetada,
   tooltipMsg: string;
+  show: boolean;
 }
 
 export interface TableButton {
