@@ -6,7 +6,7 @@ const iconModel: IconData = {
   },
   isModalFunction: false,
   componentModal: '',
-  modalMetadata: {width: '100%'},
+  modalMetadata: {width: '100%', data: {}},
   tooltipMsg: '',
   show: false
 }

@@ -58,7 +58,6 @@ export class UserFormComponent implements OnInit{
     const body = { ...this.userForm.value, groups: this.userForm.get('groups')?.value.toString() };
     this.userService.create(body).subscribe(
       () => {
-        this.matSnackBar.open('Usuario creado correctamente.');
         this.dialogRef.close();
       },
       (error) => {

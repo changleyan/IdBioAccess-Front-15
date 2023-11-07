@@ -25,6 +25,7 @@ export interface TableButton {
 
 export interface modalMetada {
   width: string;
+  data: any;
 }
 
 export interface CiudadanoDisplay {

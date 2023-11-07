@@ -1,10 +1,11 @@
 <div class="pb-3">
 
   <app-card-mat-table *ngIf="!isLoading"
-    [dataSource]="elemtData"
-    [dataColum]="dataTest"
-    [dataButton]="dataButton"
-    title="Usuarios"
+                      [dataSource]="elemtData"
+                      [dataColum]="dataTest"
+                      [dataButton]="dataButton"
+                      (actionEvent)="handleEvent($event)"
+                      title="Usuarios"
   ></app-card-mat-table>
 </div>
 

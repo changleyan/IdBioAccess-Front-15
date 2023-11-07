@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {
   GenericDisplayTableColumns, IconData,
   UserDisplay
@@ -6,9 +6,17 @@ import {
 import iconModel from "@app/common/IconData";
 import {CaptureModalComponent} from "@views/images/capture-modal/capture-modal.component";
 import {UserService} from "@app/services/user.service";
-import {tap} from "rxjs";
+import {tap, throwError} from "rxjs";
 import {UserFormComponent} from "@components/user/user-form/user-form.component";
+import {ConfirmDialogComponent} from "@components/confirm-dialog/confirm-dialog.component";
+import {Observable, Subject} from 'rxjs';
+import {EventAction} from "@app/models/action.type";
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {catchError} from "rxjs/operators";
 
+
+@UntilDestroy()
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html'
@@ -30,7 +38,7 @@ export class UserComponent implements OnInit, AfterViewInit {
         },
         isModalFunction: true,
         componentModal: CaptureModalComponent,
-        modalMetadata: {width: '80vw'},
+        modalMetadata: {...iconModel.modalMetadata, width: '80vw'},
         tooltipMsg: 'Editar usuario'
       },
         {
@@ -39,8 +47,8 @@ export class UserComponent implements OnInit, AfterViewInit {
           fns: () => {
           },
           isModalFunction: true,
-          componentModal: CaptureModalComponent,
-          modalMetadata: {width: '80vw'},
+          componentModal: ConfirmDialogComponent,
+          modalMetadata: {width: '25vw', data: {title: 'Eliminar usuario', msg: '¿Desea eliminar el usuario?'}},
           tooltipMsg: 'Eliminar usuario'
         }]
     }
@@ -55,19 +63,29 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   isLoading = true;
 
-  constructor(private userService: UserService) {
+  actionObservable!: Observable<any>;
+
+  actionSubject = new Subject<any>();
+
+  constructor(private userService: UserService,
+              private snackBar: MatSnackBar,) {
   }
 
   ngOnInit() {
+    this.actionObservable = this.actionSubject.asObservable();
+
+    this.actionObservable.pipe(
+      untilDestroyed(this),
+      tap(data => {
+        this.handleActionObservable(data);
+      })
+    ).subscribe();
   }
 
   ngAfterViewInit() {
     this.getUser();
   }
 
-  addUser() {
-    console.log('787878787');
-  }
 
   getUser(): void {
     this.userService.getUser().pipe(
@@ -76,6 +94,59 @@ export class UserComponent implements OnInit, AfterViewInit {
         this.isLoading = false;
       })
     ).subscribe();
+  }
+
+  handleEvent(event: any) {
+    console.log(event);
+    this.actionSubject.next(JSON.parse(event));
+  }
+
+  handleActionObservable(evento: EventAction) {
+    console.log(evento);
+    switch (evento.action) {
+      case 'add':
+        this.createUser(evento);
+        break;
+      case 'delete':
+        this.deleteUser(evento);
+        break;
+      case 'edit':
+        this.editUser(evento);
+        break;
+      default:
+        console.log('Acción no reconocida:', evento.action);
+    }
+  }
+
+  deleteUser(evento: EventAction) {
+    if (evento.data?.data) {
+      this.userService.delete(evento.data?.id).pipe(
+        tap(data => {
+          this.getUser();
+          this.snackBar.open('Usuario eliminado correctamente.', 'Cerrar', {
+            duration: 5000
+          });
+        }),
+        catchError(error => {
+          console.error('Error al eliminar el usuario:', error);
+          this.snackBar.open('Error al eliminar el usuario. Por favor, inténtalo de nuevo.', 'Cerrar', {
+            duration: 5000
+          });
+          return throwError(error); // Reenvía el error
+        })
+      ).subscribe();
+    }
+  }
+
+  createUser(evento: EventAction) {
+    this.getUser();
+    this.snackBar.open('Usuario creado correctamente.', 'Cerrar', {
+      duration: 5000
+    });
+  }
+
+  editUser(evento: EventAction) {
+
   }
 
 }

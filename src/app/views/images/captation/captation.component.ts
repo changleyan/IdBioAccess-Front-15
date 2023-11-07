@@ -29,7 +29,7 @@ export class CaptationComponent {
         },
         isModalFunction: true,
         componentModal: CaptureModalComponent,
-        modalMetadata: {width: '80vw'},
+        modalMetadata: {...iconModel.modalMetadata, width: '80vw'},
         tooltipMsg: ''
       }]
     },
