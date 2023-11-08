@@ -24,6 +24,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {httpInterceptorProviders} from "@app/_helpers/http.interceptor";
 import {HttpClientModule} from "@angular/common/http";
+
 // import {NgxPermissionsModule} from "ngx-permissions";
 
 

@@ -8,8 +8,10 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {PermissionService} from "@app/services/services/permission.service";
 import {ConfirmDialogComponent} from "@app/components/confirm-dialog/confirm-dialog.component";
 import {GroupFormComponent} from "@app/components/security/group-form/group-form.component";
-import {debounceTime} from "rxjs/operators";
+import {debounceTime, tap} from "rxjs/operators";
 import {GroupService} from "@app/services/services/group.service";
+import {LoadingService} from "@app/services/loading/loading.service";
+import {forkJoin, Observable} from "rxjs";
 
 @Component({
   selector: 'app-seguridad',
@@ -28,18 +30,31 @@ export class SeguridadComponent implements OnInit {
   permissionFilterControl = new FormControl('');
   changed = false;
 
+  loadGroups$ = this.loadGroups();
+  loadPermissions$ = this.loadPermissions();
+
   constructor(
     private groupService: GroupService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
+    private loadingService: LoadingService,
     private permissionService: PermissionService) {
+    this.loadingService.setLoading(true);
   }
 
 
   ngOnInit(): void {
-    this.loadGroups();
-    this.loadPermissions();
+    this.loadData()
     this.listenFilter();
+  }
+
+  loadData() {
+    forkJoin([
+      this.loadGroups$,
+      this.loadPermissions$
+    ]).subscribe(([groupsData, permissionsData]) => {
+      this.loadingService.setLoading(false);
+    });
   }
 
   selectGroup(index: number) {
@@ -120,20 +135,24 @@ export class SeguridadComponent implements OnInit {
     this.changed = false;
   }
 
-  private loadGroups() {
-    this.groupService.getAll().subscribe(data => {
-      this.groups = data.results;
-      this.selectedGroup = this.groups[0];
-      this.selectedPermissions = this.selectedGroup.permissions.map(p => p.id);
-      this.selectedIndex = 0;
-    });
+  private loadGroups(): Observable<any> {
+    return this.groupService.getAll().pipe(
+      tap(data => {
+        this.groups = data.results;
+        this.selectedGroup = this.groups[0];
+        this.selectedPermissions = this.selectedGroup.permissions.map(p => p.id);
+        this.selectedIndex = 0;
+      })
+    );
   }
 
-  private loadPermissions() {
-    this.permissionService.getAll().subscribe(data => {
-      this.permissions = data.results;
-      this.filteredPermissions = this.permissions;
-    });
+  private loadPermissions(): Observable<any> {
+    return this.permissionService.getAll().pipe(
+      tap(data => {
+        this.permissions = data.results;
+        this.filteredPermissions = this.permissions;
+      })
+    );
   }
 
   private listenFilter() {

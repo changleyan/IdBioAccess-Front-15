@@ -1,1 +1,8 @@
+<div class="h-screen w-screen flex justify-center items-center absolute z-50"
+     style="background-color: rgba(0, 0, 0, 0.8)"
+     *ngIf="loadingService.loading">
+  <span class="loader"></span>
+</div>
+
 <router-outlet></router-outlet>
+

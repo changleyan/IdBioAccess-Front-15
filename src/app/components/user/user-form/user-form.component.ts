@@ -9,6 +9,7 @@ import {GroupService} from "@app/services/services/group.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ErrorDialogComponent} from "@components/dialog/dialog.component";
 import {HttpErrorResponse} from "@angular/common/http";
+import {LoadingService} from "@app/services/loading/loading.service";
 
 @Component({
   selector: 'app-user-form',
@@ -28,9 +29,11 @@ export class UserFormComponent implements OnInit {
     private groupService: GroupService,
     private fb: FormBuilder,
     private dialog: MatDialog,
+    private loadingService: LoadingService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UserFormComponent>
   ) {
+    this.loadingService.setLoading(true);
     this.loadGroups();
     this.isEdit = this.data ? true : false;
     this.isChangePassword = (this.data?.action && this.data?.action === 'changePassword') ? true : false;
@@ -73,10 +76,12 @@ export class UserFormComponent implements OnInit {
   private loadGroups() {
     this.groupService.getAll().subscribe(data => {
       this.grupos = data.results;
+      this.loadingService.setLoading(false);
     });
   }
 
   handleSubmit(){
+    this.loadingService.setLoading(true);
     if (this.userForm.valid) {
       if (this.isEdit) {
         this.isChangePassword ? this.updatePassword() : this.updateUser();
@@ -93,6 +98,7 @@ export class UserFormComponent implements OnInit {
         this.dialogRef.close(true);
       },
       (error) => {
+        this.loadingService.setLoading(false);
         if (error instanceof HttpErrorResponse && error.status === 400) {
           // Maneja los errores personalizados del API
           const errorResponse = error.error;
@@ -115,6 +121,7 @@ export class UserFormComponent implements OnInit {
         this.dialogRef.close(true);
       },
       (error) => {
+        this.loadingService.setLoading(false);
         if (error instanceof HttpErrorResponse && error.status === 400) {
           // Maneja los errores personalizados del API
           const errorResponse = error.error;
@@ -135,6 +142,7 @@ export class UserFormComponent implements OnInit {
         this.dialogRef.close(true);
       },
       (error) => {
+        this.loadingService.setLoading(false);
         if (error instanceof HttpErrorResponse && error.status === 400) {
           // Maneja los errores personalizados del API
           const errorResponse = error.error;

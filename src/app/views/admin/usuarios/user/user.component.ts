@@ -14,6 +14,7 @@ import {EventAction} from "@app/models/action.type";
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError} from "rxjs/operators";
+import {LoadingService} from "@app/services/loading/loading.service";
 
 
 @UntilDestroy()
@@ -71,7 +72,9 @@ export class UserComponent implements OnInit, AfterViewInit {
   actionSubject = new Subject<any>();
 
   constructor(private userService: UserService,
+              private loadingService: LoadingService,
               private snackBar: MatSnackBar,) {
+    this.loadingService.setLoading(true);
   }
 
   ngOnInit() {
@@ -95,6 +98,7 @@ export class UserComponent implements OnInit, AfterViewInit {
       tap(data => {
         this.elemtData = data.results;
         this.isLoading = false;
+        this.loadingService.setLoading(false);
       })
     ).subscribe();
   }
@@ -104,6 +108,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   handleActionObservable(evento: EventAction) {
+    this.loadingService.setLoading(true);
     switch (evento.action) {
       case 'add':
         this.genericResponse(evento, 'Usuario creado correctamente.');
@@ -133,6 +138,7 @@ export class UserComponent implements OnInit, AfterViewInit {
           });
         }),
         catchError(error => {
+          this.loadingService.setLoading(false);
           console.error('Error al eliminar el usuario:', error);
           this.snackBar.open('Error al eliminar el usuario. Por favor, inténtalo de nuevo.', 'Cerrar', {
             duration: 5000
@@ -150,7 +156,7 @@ export class UserComponent implements OnInit, AfterViewInit {
         duration: 5000
       });
     }
-
+    this.loadingService.setLoading(false);
   }
 
 }
