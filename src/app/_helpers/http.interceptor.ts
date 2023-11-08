@@ -12,13 +12,18 @@ import {catchError} from 'rxjs/operators';
 import {StorageService} from "../services/storage.service";
 import {EventBusService} from "../services/event-bus.service";
 import {EventData} from "../models/event.class";
+import {Router} from "@angular/router";
+import {LoadingService} from "@app/services/loading/loading.service";
 
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
   private isRefreshing = false;
 
-  constructor(private storageService: StorageService, private eventBusService: EventBusService) {
+  constructor(private storageService: StorageService,
+              private router: Router,
+              private loadingService: LoadingService,
+              private eventBusService: EventBusService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -39,6 +44,10 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         });
       }
     }
+    if(!this.storageService.isLoggedIn()) {
+      this.router.navigate(['/auth/login']);
+      this.loadingService.setLoading(false);
+    }
 
     return next.handle(newReq).pipe(
       catchError((error) => {
@@ -56,13 +65,11 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (!this.isRefreshing) {
-      this.isRefreshing = true;
-
-      if (this.storageService.isLoggedIn()) {
-        this.eventBusService.emit(new EventData('logout', null));
-      }
+    this.loadingService.setLoading(false);
+    if (this.storageService.isLoggedIn()) {
+      this.eventBusService.emit(new EventData('logout', null));
     }
+    this.router.navigate(['/auth/login']);
 
     return next.handle(request);
   }
