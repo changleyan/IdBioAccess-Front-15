@@ -35,7 +35,8 @@ export class UserFormComponent implements OnInit {
   ) {
     this.loadingService.setLoading(true);
     this.loadGroups();
-    this.isEdit = this.data ? true : false;
+    console.log(this.data, 'data')
+    this.isEdit = Object.keys(this.data).length !== 0  ? true : false;
     this.isChangePassword = (this.data?.action && this.data?.action === 'changePassword') ? true : false;
   }
 

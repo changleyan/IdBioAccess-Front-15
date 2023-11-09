@@ -14,6 +14,7 @@ import {EventBusService} from "../services/event-bus.service";
 import {EventData} from "../models/event.class";
 import {Router} from "@angular/router";
 import {LoadingService} from "@app/services/loading/loading.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 @Injectable()
@@ -22,6 +23,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
   constructor(private storageService: StorageService,
               private router: Router,
+              private snackBar: MatSnackBar,
               private loadingService: LoadingService,
               private eventBusService: EventBusService) {
   }
@@ -54,9 +56,11 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         if (
           error instanceof HttpErrorResponse &&
           !req.url.includes('auth/login') &&
-          error.status === 401
+          (error.status === 401 || error.status === 403)
         ) {
-          return this.handle401Error(req, next);
+          return error.status === 401 ?
+            this.handle401Error(req, next, 'Su sesión ha expirado. Por favor, inicia sesión de nuevo.')
+            : this.handle401Error(req, next, 'No tiene permisos para realizar esta operación');
         }
 
         return throwError(() => error);
@@ -64,7 +68,10 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     );
   }
 
-  private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler, msg: string) {
+    this.snackBar.open(msg, 'Cerrar', {
+      duration: 5000
+    });
     this.loadingService.setLoading(false);
     if (this.storageService.isLoggedIn()) {
       this.eventBusService.emit(new EventData('logout', null));

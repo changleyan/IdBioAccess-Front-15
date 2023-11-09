@@ -97,7 +97,9 @@ export class SeguridadComponent implements OnInit {
         if (result) {
           this.groupService.update({id: this.selectedGroup.id, permissions: this.selectedPermissions}).subscribe(
             () => {
-              this.snackBar.open('Cambios guardados correctamente.');
+              this.snackBar.open('Cambios guardados correctamente.', 'Cerrar', {
+                duration: 5000
+              });
               this.loadGroups();
               this.changed = false;
             },
@@ -116,7 +118,9 @@ export class SeguridadComponent implements OnInit {
     ref.afterClosed().subscribe(result => {
       if (result) {
         this.groupService.create(result).subscribe(created => {
-          this.snackBar.open('Grupo creado correctamente.');
+          this.snackBar.open('Grupo creado correctamente.', 'Cerrar', {
+            duration: 5000
+          });
 
           this.loadGroups();
 
@@ -193,11 +197,15 @@ export class SeguridadComponent implements OnInit {
       if (result) {
         this.groupService.delete(group.id).subscribe(
           () => {
-            this.snackBar.open('Grupo eliminado correctamente.');
+            this.snackBar.open('Grupo eliminado correctamente.', 'Cerrar', {
+              duration: 5000
+            });
             this.loadGroups();
           },
           () => {
-            this.snackBar.open('Error al eliminar el grupo.');
+            this.snackBar.open('Error al eliminar el grupo.', 'Cerrar', {
+              duration: 5000
+            });
           }
         );
       }
