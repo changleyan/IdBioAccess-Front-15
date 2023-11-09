@@ -1,7 +1,7 @@
 <div class="container w-full h-fit p-2">
   <form [formGroup]="groupForm" (ngSubmit)="save()" class="w-full">
     <div class="flex flex-col">
-      <mat-form-field appearance="outline" floatLabel="auto" class="w-full">
+      <mat-form-field appearance="fill" floatLabel="auto" class="w-full">
         <mat-label>Nombre</mat-label>
         <input formControlName="name" matInput type="text">
       </mat-form-field>

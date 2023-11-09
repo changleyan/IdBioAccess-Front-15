@@ -54,7 +54,7 @@ export const defaultNavigation: NavigationItem[] = [
   },
   {
     title: 'Auth Layout Pages',
-    hidden: false,
+    hidden: true,
     disabled: false,
     childrenItem: [
       {

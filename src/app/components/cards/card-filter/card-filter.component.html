@@ -29,7 +29,7 @@
             >
               Parámetro
             </label>
-            <mat-form-field class="w-full" appearance="outline">
+            <mat-form-field class="w-full" appearance="fill">
               <mat-select [(ngModel)]="selectedValue" name="food" (selectionChange)="handleParameterChange()">
                 <mat-option *ngFor="let parameter of parameters" [value]="parameter.value">
                   {{parameter.viewValue}}
@@ -46,7 +46,7 @@
             >
               Valor
             </label>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="fill">
               <mat-label>{{selectedValue | titlecase}}</mat-label>
               <input matInput placeholder="Ingrese el valor">
             </mat-form-field>
