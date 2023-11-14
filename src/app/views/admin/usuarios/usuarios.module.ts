@@ -6,6 +6,7 @@ import {UserComponent} from './user/user.component';
 import {MaterialModule} from "@app/shared/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CardsModule} from "@components/cards/cards.module";
+import {NgxPermissionsModule} from "ngx-permissions";
 
 
 @NgModule({
@@ -18,7 +19,10 @@ import {CardsModule} from "@components/cards/cards.module";
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    CardsModule
+    CardsModule,
+    NgxPermissionsModule.forChild({
+      permissionsIsolate: true,
+      rolesIsolate: true})
   ]
 })
 export class UsuariosModule {

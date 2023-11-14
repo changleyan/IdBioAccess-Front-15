@@ -7,12 +7,15 @@ import {SettingsComponent} from "@views/admin/settings/settings.component";
 import {TablesComponent} from "@views/admin/tables/tables.component";
 import {AuthComponent} from "@app/layouts/auth/auth.component";
 import {LoginComponent} from "@views/auth/login/login.component";
+import {NgxPermissionsGuard} from "ngx-permissions";
 
 
 const routes: Routes = [
   {
     path: "admin",
     component: AdminComponent,
+    canActivate: [NgxPermissionsGuard],
+    data: {permissions: {only: ['Admin']}}, // Ajusta el nombre del grupo según tu lógica
     children: [
       {path: "dashboard", component: DashboardComponent},
       {path: "settings", component: SettingsComponent},
@@ -23,11 +26,14 @@ const routes: Routes = [
   {
     path: "administracion",
     component: AdminComponent,
+    canActivate: [NgxPermissionsGuard],
+    data: {permissions: {only: ['Admin']}}, // Ajusta el nombre del grupo según tu lógica
     children: [
       {
         path: "usuarios",
         loadChildren: () => import('./views/admin/usuarios/usuarios.module').then((m) => m.UsuariosModule)
-      }, {
+      },
+      {
         path: "seguridad",
         loadChildren: () => import('./views/admin/seguridad/seguridad.module').then((m) => m.SeguridadModule)
       },
@@ -37,6 +43,8 @@ const routes: Routes = [
   {
     path: "imagenes",
     component: AdminComponent,
+    canActivate: [NgxPermissionsGuard],
+    data: {permissions: {only: ['Captacion', 'Admin']}}, // Ajusta el nombre del grupo según tu lógica
     children: [
       {
         path: "captacion",
@@ -49,11 +57,10 @@ const routes: Routes = [
     path: "auth",
     component: AuthComponent,
     children: [
-      { path: "login", component: LoginComponent },
-      { path: "", redirectTo: "login", pathMatch: "full" },
+      {path: "login", component: LoginComponent},
+      {path: "", redirectTo: "login", pathMatch: "full"},
     ],
   },
-
   {path: "", redirectTo: "auth/login", pathMatch: "full"},
   {path: "**", redirectTo: "", pathMatch: "full"},
 ];

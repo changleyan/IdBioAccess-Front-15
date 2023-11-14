@@ -6,6 +6,7 @@ import {GroupFormComponent} from "@components/security/group-form/group-form.com
 import {SeguridadComponent} from "@components/security/seguridad/seguridad.component";
 import {MaterialModule} from "@app/shared/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgxPermissionsModule} from "ngx-permissions";
 
 
 @NgModule({
@@ -18,7 +19,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    SeguridadRoutingModule
+    SeguridadRoutingModule,
+    NgxPermissionsModule.forChild({
+      permissionsIsolate: true,
+      rolesIsolate: true})
   ]
 })
 export class SeguridadModule { }

@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CaptureModalComponent } from './capture-modal/capture-modal.component';
 import {MaterialModule} from "@app/shared/material.module";
 import {WebcamModule} from "ngx-webcam";
+import {NgxPermissionsModule} from "ngx-permissions";
 
 
 @NgModule({
@@ -22,7 +23,10 @@ import {WebcamModule} from "ngx-webcam";
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
-        WebcamModule
+        WebcamModule,
+      NgxPermissionsModule.forChild({
+        permissionsIsolate: true,
+        rolesIsolate: true})
     ],
 })
 export class ImagesModule { }
