@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import {Component} from "@angular/core";
 import {LoadingService} from "@app/services/loading/loading.service";
 import {StorageService} from "@app/services/storage.service";
 import {NgxPermissionsService} from "ngx-permissions";
@@ -14,9 +14,6 @@ export class AppComponent {
   constructor(public loadingService: LoadingService,
               private permissionsService: NgxPermissionsService,
               private storageService: StorageService) {
-  }
-
-  ngOnInit(): void {
     // Obtén el usuario actual desde el servicio
     const currentUser = this.storageService.getUser();
 
@@ -31,4 +28,5 @@ export class AppComponent {
       this.permissionsService.loadPermissions(userGroups);
     }
   }
+
 }

@@ -15,13 +15,13 @@ import {AppRoutingModule} from "@app/app-routing.module";
 import { UserFormComponent } from './user/user-form/user-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { ErrorDialogComponent } from './dialog/dialog.component';
+import {NgxPermissionsModule} from "ngx-permissions";
 
 const sharedComponents = [
   ConfirmDialogComponent,
   ContainerComponent,
   HeaderStatsComponent,
   MapExampleComponent,
-
   SidebarComponent
 ];
 
@@ -41,6 +41,7 @@ const sharedComponents = [
     SharedModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NgxPermissionsModule
   ],
   exports: [
     CardsModule,

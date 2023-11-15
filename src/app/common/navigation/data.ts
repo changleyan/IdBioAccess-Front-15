@@ -5,6 +5,7 @@ export const defaultNavigation: NavigationItem[] = [
     title: 'Imágenes',
     hidden: false,
     disabled: false,
+    permissions: ['Captacion', 'Admin'],
     childrenItem: [
       {
         title: 'Captación',
@@ -12,6 +13,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Capturar imagenes',
         icon: 'camera_alt',
+        permissions: ['Captacion', 'Admin'],
         link: '/imagenes/captacion'
       }
     ],
@@ -20,6 +22,7 @@ export const defaultNavigation: NavigationItem[] = [
     title: 'Solapín',
     hidden: true,
     disabled: false,
+    permissions: ['Captacion'],
     childrenItem: [
       {
         title: 'Asociar',
@@ -27,6 +30,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'pool',
+        permissions: ['Captacion'],
         link: '/admin/settings'
       }, {
         title: 'Aprobar',
@@ -34,6 +38,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'pool',
+        permissions: ['Captacion'],
         link: '/admin/settings'
       }, {
         title: 'Activar',
@@ -41,6 +46,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'pool',
+        permissions: ['Captacion'],
         link: '/admin/settings'
       }, {
         title: 'Anular',
@@ -48,29 +54,16 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'pool',
+        permissions: ['Captacion'],
         link: '/admin/settings'
       },
-    ],
-  },
-  {
-    title: 'Auth Layout Pages',
-    hidden: true,
-    disabled: false,
-    childrenItem: [
-      {
-        title: 'Login',
-        hidden: false,
-        disabled: false,
-        tooltip: 'Acceso al dashboard',
-        icon: 'fas fa-fingerprint',
-        link: '/auth/login'
-      }
     ],
   },
   {
     title: 'Administración',
     hidden: false,
     disabled: false,
+    permissions: ['Admin'],
     childrenItem: [
       {
         title: 'Usuarios',
@@ -78,6 +71,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Gestionar usuarios',
         icon: 'group',
+        permissions: ['Admin'],
         link: '/administracion/usuarios'
       }, {
         title: 'Seguridad',
@@ -85,6 +79,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Gestionar permisos',
         icon: 'security',
+        permissions: ['Admin'],
         link: '/administracion/seguridad'
       }
     ],
@@ -93,6 +88,7 @@ export const defaultNavigation: NavigationItem[] = [
     title: 'General',
     hidden: true,
     disabled: false,
+    permissions: ['Admin'],
     childrenItem: [
       {
         title: 'Dashboard',
@@ -100,6 +96,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'analytics',
+        permissions: ['Admin'],
         link: '/admin/dashboard'
       }, {
         title: 'Settings',
@@ -107,6 +104,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'settings',
+        permissions: ['Admin'],
         link: '/admin/settings'
       }, {
         title: 'Tables',
@@ -114,6 +112,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'table_chart',
+        permissions: ['Admin'],
         link: '/admin/tables'
       }
     ],

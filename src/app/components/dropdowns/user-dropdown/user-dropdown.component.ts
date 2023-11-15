@@ -13,10 +13,14 @@ export class UserDropdownComponent implements AfterViewInit {
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef!: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef!: ElementRef;
+  username = 'Anonimus';
 
   constructor(private authService: AuthService,
               private router: Router,
-              private storageService: StorageService) {  }
+              private storageService: StorageService) {
+    const currentUser = this.storageService.getUser();
+    this.username = currentUser?.user?.username;
+  }
 
 
   ngAfterViewInit() {

@@ -61,6 +61,7 @@
       </div>
 
       <div *ngFor="let navigationItem of navigationsItems" [ngStyle]="{'display': navigationItem.hidden ? 'none' : ''}">
+
         <!-- Divider -->
         <hr class="my-4 md:min-w-full"/>
         <!-- Heading -->
@@ -72,27 +73,29 @@
         <!-- Navigation -->
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none pl-4">
-          <li class="items-center"
-              matTooltip="{{childrenItem.tooltip}}"
-              matTooltipPosition="above"
-              *ngFor="let childrenItem of navigationItem.childrenItem"
-              [ngStyle]="{'display': childrenItem.hidden ? 'none' : ''}">
-            <a
-              (click)="handleClickItem( navigationItem.title + ' ' + childrenItem.title)"
-              [routerLink]="[childrenItem.link]"
-              class="text-xs uppercase py-3 font-bold block flex items-center gap-1 text-gray-800"
-              routerLinkActive
-              #adminDashboard="routerLinkActive"
-              [ngClass]="
+          <ng-container *ngFor="let childrenItem of navigationItem.childrenItem">
+            <li class="items-center"
+                matTooltip="{{childrenItem.tooltip}}"
+                matTooltipPosition="above"
+                *ngxPermissionsOnly="childrenItem.permissions"
+                [ngStyle]="{'display': childrenItem.hidden ? 'none' : ''}">
+              <a
+                (click)="handleClickItem( navigationItem.title + ' ' + childrenItem.title)"
+                [routerLink]="[childrenItem.link]"
+                class="text-xs uppercase py-3 font-bold block flex items-center gap-1 text-gray-800"
+                routerLinkActive
+                #adminDashboard="routerLinkActive"
+                [ngClass]="
               adminDashboard.isActive
                 ? 'text-red-600 hover:text-red-700'
                 : 'text-gray-700 hover:text-gray-500'
             "
-            >
-              <mat-icon>{{childrenItem.icon}}</mat-icon>
-              {{childrenItem.title}}
-            </a>
-          </li>
+              >
+                <mat-icon>{{childrenItem.icon}}</mat-icon>
+                {{childrenItem.title}}
+              </a>
+            </li>
+          </ng-container>
         </ul>
       </div>
 

@@ -3,6 +3,7 @@ export interface NavigationItem {
   hidden?: boolean;
   active?: boolean;
   disabled?: boolean;
+  permissions: string[];
   childrenItem: NavigationItemChildren[];
 }
 
@@ -12,5 +13,6 @@ export interface NavigationItemChildren {
   disabled?: boolean;
   tooltip?: string;
   link?: string;
+  permissions: string[];
   icon?: string;
 }

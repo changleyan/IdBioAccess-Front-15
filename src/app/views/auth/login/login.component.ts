@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "@app/services/auth.service";
 import {StorageService} from "@app/services/storage.service";
 import {Router} from "@angular/router";
+import {tap} from "rxjs";
+import {NgxPermissionsService} from "ngx-permissions";
 
 @Component({
   selector: "app-login",
@@ -17,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
               private router: Router,
+              private permissionsService: NgxPermissionsService,
               private storageService: StorageService) {
     this.loginForm = this.formBuilder.group({
       user: ['', Validators.required],
@@ -32,13 +35,15 @@ export class LoginComponent implements OnInit {
 
   handleLogin() {
     if (this.loginForm.valid) {
-      console.log('Datos guardados:', this.loginForm.value);
       const username = this.loginForm.get('user')?.value || '';
       const password = this.loginForm.get('password')?.value || '';
 
       this.authService.login(username, password).subscribe({
         next: data => {
           this.storageService.saveUser(data);
+
+          const userGroups = data.user.groups.map((group: any) => group.name);
+          this.permissionsService.loadPermissions(userGroups);
 
           this.isLoginFailed = false;
           this.isLoggedIn = true;
