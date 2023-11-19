@@ -3,7 +3,7 @@ import {
   GenericDisplayTableColumns, IconData,
   UserDisplay
 } from "@app/models/displayTableColumns";
-import iconModel from "@app/common/IconData";
+import iconModel, {rowModel} from "@app/common/IconData";
 import {CaptureModalComponent} from "@views/images/capture-modal/capture-modal.component";
 import {UserService} from "@app/services/user.service";
 import {tap, throwError} from "rxjs";
@@ -24,13 +24,13 @@ import {LoadingService} from "@app/services/loading/loading.service";
 })
 export class UserComponent implements OnInit, AfterViewInit {
   dataTest: GenericDisplayTableColumns[] = [
-    {headerName: 'Nombres', dataKeyName: 'first_name', tooltipMsg: '', iconData: [iconModel]},
-    {headerName: 'Apellidos', dataKeyName: 'last_name', tooltipMsg: '', iconData: [iconModel]},
-    {headerName: 'Usuario', dataKeyName: 'username', tooltipMsg: '', iconData: [iconModel]},
-    {headerName: 'No. Carné', dataKeyName: 'ci', tooltipMsg: '', iconData: [iconModel]},
-    {headerName: 'Correo', dataKeyName: 'email', tooltipMsg: '', iconData: [iconModel]},
+    {...rowModel, headerName: 'Nombres', dataKeyName: 'first_name', tooltipMsg: '', iconData: [iconModel]},
+    {...rowModel, headerName: 'Apellidos', dataKeyName: 'last_name', tooltipMsg: '', iconData: [iconModel]},
+    {...rowModel, headerName: 'Usuario', dataKeyName: 'username', tooltipMsg: '', iconData: [iconModel]},
+    {...rowModel, headerName: 'No. Carné', dataKeyName: 'ci', tooltipMsg: '', iconData: [iconModel]},
+    {...rowModel, headerName: 'Correo', dataKeyName: 'email', tooltipMsg: '', iconData: [iconModel]},
     {
-      headerName: 'Operaciones', dataKeyName: 'action1', tooltipMsg: '',
+      ...rowModel, headerName: 'Operaciones', dataKeyName: 'action1', tooltipMsg: '',
       isIcon: true,
       iconData: [{
         ...iconModel,

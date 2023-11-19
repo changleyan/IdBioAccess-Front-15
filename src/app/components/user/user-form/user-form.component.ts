@@ -35,7 +35,6 @@ export class UserFormComponent implements OnInit {
   ) {
     this.loadingService.setLoading(true);
     this.loadGroups();
-    console.log(this.data, 'data')
     this.isEdit = Object.keys(this.data).length !== 0  ? true : false;
     this.isChangePassword = (this.data?.action && this.data?.action === 'changePassword') ? true : false;
   }
@@ -43,8 +42,8 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
     this.userForm = this.fb.group({
       username: ['', [Validators.required]],
-      first_name: ['', [Validators.required]],
-      last_name: ['', [Validators.required]],
+      first_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      last_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       password: ['', [Validators.required]],
       repeat_password: ['', [Validators.required]],
       ci: ['', [Validators.required]],

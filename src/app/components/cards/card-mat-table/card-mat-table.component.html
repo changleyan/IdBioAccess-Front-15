@@ -23,17 +23,34 @@
           <mat-cell *matCellDef="let row"
                     [matTooltip]="column.tooltipMsg"
                     matTooltipPosition="right">
-            <div *ngIf="column.isIcon; else textColumn">
-              <mat-icon *ngFor="let actions of column.iconData"
-                        (click)="handleClick(row, actions)"
-                        [matTooltip]="actions.tooltipMsg"
-                        class="hover:scale-125 hover:text-red-800 cursor-pointer ml-1">
-                {{actions.icon}}
-              </mat-icon>
+
+
+            <div [ngSwitch]="getColumnType(column)">
+              <div *ngSwitchCase="'icon'">
+                <mat-icon *ngFor="let actions of column.iconData"
+                          (click)="handleClick(row, actions)"
+                          [matTooltip]="actions.tooltipMsg"
+                          class="hover:scale-125 hover:text-red-800 cursor-pointer ml-1">
+                  {{actions.icon}}
+                </mat-icon>
+              </div>
+
+              <div class="thumbnail" *ngSwitchCase="'img'">
+                <!-- Lógica para manejar imágenes -->
+                <img [src]="row[column.dataKeyName]" [style.border]="'2px solid ' + getColorForRole('visitante')" alt="Imagen">
+              </div>
+
+
+              <div *ngSwitchCase="'text'">
+                {{row[column.dataKeyName]}}
+              </div>
+
+              <div *ngSwitchDefault>
+                <!-- Caso por defecto -->
+                Contenido por defecto
+              </div>
             </div>
-            <ng-template #textColumn>
-              {{row[column.dataKeyName]}}
-            </ng-template>
+
 
           </mat-cell>
         </ng-container>

@@ -23,4 +23,13 @@ export interface Ciudadano {
   idexpediente:     string;
   fecha:            Date;
   idpersona:        string;
+  imagen_facil:      ImagenFacil;
+}
+
+export interface ImagenFacil {
+  idciudadano?:        number;
+  foto?:               string;
+  valida?:             boolean;
+  fecha?:              Date;
+  fechaActualizacion?: Date;
 }

@@ -16,6 +16,9 @@
                 *ngIf="userForm.get('first_name')?.hasError('required') &&userForm.get('first_name')?.touched">
                 El nombre es requerido
               </mat-error>
+              <mat-error *ngIf="userForm.get('first_name')?.hasError('pattern') && userForm.get('first_name')?.touched">
+                Por favor, ingresa solo caracteres alfabéticos.
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill"
@@ -25,6 +28,9 @@
               <mat-error
                 *ngIf="userForm.get('last_name')?.hasError('required') &&userForm.get('last_name')?.touched">
                 El apellido es requerido
+              </mat-error>
+              <mat-error *ngIf="userForm.get('last_name')?.hasError('pattern') && userForm.get('last_name')?.touched">
+                Por favor, ingresa solo caracteres alfabéticos.
               </mat-error>
             </mat-form-field>
 

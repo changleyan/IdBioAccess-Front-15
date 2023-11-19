@@ -20,6 +20,7 @@ export class CiudadanoDataService {
     this.loadingService.setLoading(true);
     this.ciudadanoService.getCiudadano().pipe(
       tap(data => {
+        console.log('data', data);
         this.elemtData = data.results.map((ciudadano: any) => this.transformarCiudadano(ciudadano));
         this.isLoading = false;
         this.loadingService.setLoading(false);
@@ -46,6 +47,7 @@ export class CiudadanoDataService {
 
   transformarCiudadano(ciudadano: Ciudadano): CiudadanoDisplay {
     const transformedCiudadano: CiudadanoDisplay = {
+      foto: ciudadano.imagen_facil.foto || './assets/img/user-placeholder.png',
       ci: ciudadano.carnetidentidad || '', // Puedes ajustar la lógica según tus necesidades
       name: `${ciudadano.primernombre} ${ciudadano.segundonombre || ''}`.trim(),
       apellidos: `${ciudadano.primerapellido} ${ciudadano.segundoapellido || ''}`.trim(),
@@ -54,6 +56,7 @@ export class CiudadanoDataService {
       rol: ciudadano.roluniversitario.trim(),
       area: ciudadano.area.trim(),
       residente: ciudadano.residente ? 'Si' : 'No',
+      allData: ciudadano
     };
     return transformedCiudadano;
   }

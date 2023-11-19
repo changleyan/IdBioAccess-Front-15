@@ -1,7 +1,11 @@
+import {Ciudadano} from "@app/models/ciudadano.response.type";
+
 export interface GenericDisplayTableColumns {
   headerName: string;
   dataKeyName: string;
-  isIcon?: boolean;
+  isIcon: boolean;
+  isImg: boolean;
+  imgSrc: string;
   iconData: IconData[];
   tooltipMsg: string;
 }
@@ -10,6 +14,7 @@ export interface IconData {
   icon: string;
   fns: (data: any) => void;
   isModalFunction: boolean;
+  executeFns: boolean;
   componentModal: any;
   modalMetadata: modalMetada,
   tooltipMsg: string;
@@ -29,6 +34,7 @@ export interface modalMetada {
 }
 
 export interface CiudadanoDisplay {
+  foto: string;
   ci: string;
   name: string;
   apellidos: string;
@@ -37,6 +43,7 @@ export interface CiudadanoDisplay {
   rol: string;
   area: string;
   residente: string;
+  allData?: Ciudadano;
 }
 export interface Element {
   name: string;

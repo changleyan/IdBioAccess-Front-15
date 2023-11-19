@@ -35,6 +35,8 @@ export class CardMatTableComponent implements OnChanges, OnInit, AfterViewInit {
 
   @Output() actionEvent = new EventEmitter();
 
+  borderColor: string = 'blue';
+
 
   constructor(private dialog: MatDialog) {
   }
@@ -65,7 +67,12 @@ export class CardMatTableComponent implements OnChanges, OnInit, AfterViewInit {
   }
 
   handleClick(data: any, dataIcon: IconData): any {
-    return dataIcon.isModalFunction ? this.openDialog(data, dataIcon.componentModal, dataIcon.modalMetadata, dataIcon.icon) : dataIcon.fns(data);
+    return dataIcon.executeFns ? this.handleClickFns(data, dataIcon) : dataIcon.isModalFunction ? this.openDialog(data, dataIcon.componentModal, dataIcon.modalMetadata, dataIcon.icon) : dataIcon.fns(data);
+  }
+
+  handleClickFns(data: any, dataIcon: IconData) {
+    dataIcon.fns(data);
+    this.openDialog(data, dataIcon.componentModal, dataIcon.modalMetadata, dataIcon.icon);
   }
 
   openDialog(data: any, component: any, modalMetadata: any, action: string = '') {
@@ -79,6 +86,32 @@ export class CardMatTableComponent implements OnChanges, OnInit, AfterViewInit {
   emitEvento(datos: EventAction) {
     this.actionEvent.emit(JSON.stringify(datos));
   }
+
+  getColumnType(column: any): string {
+    if (column.isIcon) {
+      return 'icon';
+    } else if (column.isImg) {
+      return 'img';
+    } else {
+      return 'text';
+    }
+  }
+
+  getColorForRole(role: string): string {
+    switch (role.toLowerCase()) {
+      case 'visitante':
+        return 'blue';
+      case 'trabajador':
+        return 'green';
+      case 'estudiante':
+        return 'orange';
+      case 'tercerizado':
+        return 'purple';
+      default:
+        return 'gray'; // Color predeterminado para roles no especificados
+    }
+  }
+
 }
 
 

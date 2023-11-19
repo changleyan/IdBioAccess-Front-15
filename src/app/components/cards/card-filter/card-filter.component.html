@@ -59,28 +59,12 @@
             >
               Valor
             </label>
-            <mat-form-field appearance="fill">
+            <mat-form-field class="w-full" appearance="fill">
               <mat-label>{{ filterGroup?.get('selectedValue')?.value | titlecase }}</mat-label>
               <input matInput placeholder="Ingrese el valor" formControlName="inputValue">
             </mat-form-field>
           </div>
         </div>
-<!--        <div class="w-full lg:w-4/12 px-4" *ngIf="i > 0">-->
-<!--          <div class="relative w-full mb-3">-->
-<!--            <label-->
-<!--              class="block uppercase text-gray-600 text-xs font-bold mb-2"-->
-<!--              htmlFor="grid-password"-->
-<!--            >-->
-<!--              Postal Code-->
-<!--            </label>-->
-<!--            <input-->
-<!--              type="text"-->
-<!--              class="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"-->
-<!--              value="Postal Code"-->
-<!--              disabled-->
-<!--            />-->
-<!--          </div>-->
-<!--        </div>-->
       </div>
 
     </form>
