@@ -8,7 +8,7 @@ import {CardStatsComponent} from "./card-stats/card-stats.component";
 import {CardTableComponent} from "./card-table/card-table.component";
 import {CardFilterComponent} from "./card-filter/card-filter.component";
 import {CardMatTableComponent} from "./card-mat-table/card-mat-table.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "@app/shared/material.module";
 import {DropdownsModule} from "@components/dropdowns/dropdowns.module";
 
@@ -34,6 +34,7 @@ const cardsComponents = [
     CommonModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     DropdownsModule
   ]
 })

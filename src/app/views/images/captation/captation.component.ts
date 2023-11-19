@@ -1,15 +1,20 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CiudadanoDisplay, GenericDisplayTableColumns} from "@app/models/displayTableColumns";
 import {CaptureService} from "@app/services/capture/capture.service";
 import {CaptureModalComponent} from "@views/images/capture-modal/capture-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import iconModel from "@app/common/IconData";
+import {tap} from "rxjs";
+import {CiudadanoService} from "@app/services/ciudadano.service";
+import {LoadingService} from "@app/services/loading/loading.service";
+import {Ciudadano} from "@app/models/ciudadano.response.type";
+import {CiudadanoDataService} from "@app/services/ciudadano-data.service";
 
 @Component({
   selector: 'app-captation',
   templateUrl: './captation.component.html'
 })
-export class CaptationComponent {
+export class CaptationComponent implements OnInit {
 
 
   dataTest: GenericDisplayTableColumns[] = [
@@ -23,7 +28,8 @@ export class CaptationComponent {
     {headerName: 'Residente', dataKeyName: 'residente', tooltipMsg: '', iconData: [iconModel]},
     {
       headerName: 'Acción', dataKeyName: 'action', tooltipMsg: 'Capturar imagen',
-      isIcon: true, iconData: [{...iconModel,
+      isIcon: true, iconData: [{
+        ...iconModel,
         icon: 'camera_alt',
         fns: () => {
         },
@@ -35,41 +41,13 @@ export class CaptationComponent {
     },
   ];
 
-  elemtData: CiudadanoDisplay[] = [
-    {
-      ci: '9547158555',
-      name: 'Juan',
-      apellidos: 'Perez Soto',
-      date: '12/12/1990',
-      sexo: 'Masculino',
-      rol: 'Estudiante',
-      area: 'Facultad 2',
-      residente: 'Si'
-    },
-    {
-      ci: '8745158555',
-      name: 'Camilo',
-      apellidos: 'Torres Quintana',
-      date: '12/12/1990',
-      sexo: 'Masculino',
-      rol: 'Trabajdor',
-      area: 'Facultad 1',
-      residente: 'Si'
-    },
-    {
-      ci: '0214755575',
-      name: 'Jose Juan',
-      apellidos: 'Manuel Sanchez',
-      date: '12/12/1990',
-      sexo: 'Masculino',
-      rol: 'Estudiante',
-      area: 'Facultad 2',
-      residente: 'Si'
-    },
-  ];
 
-  constructor(private captureService: CaptureService, private dialog: MatDialog
-  ) {
+  constructor(public ciudadanoDataService: CiudadanoDataService
+  ) { }
+
+  ngOnInit(): void {
+    // this.ciudadanoDataService.getCiudadanos();
+    this.ciudadanoDataService.clearData();
   }
 
 }
