@@ -100,15 +100,23 @@ export class CardMatTableComponent implements OnChanges, OnInit, AfterViewInit {
   getColorForRole(role: string): string {
     switch (role.toLowerCase()) {
       case 'visitante':
-        return 'blue';
+        return '#18af7a';
       case 'trabajador':
-        return 'green';
+        return '#af1818';
       case 'estudiante':
-        return 'orange';
+        return '#2544a7';
       case 'tercerizado':
-        return 'purple';
+        return '#175a0c';
+      case 'familiar':
+        return '#9d590f';
+      case 'servicios':
+        return '#630f9d';
+      case 'postgrado':
+        return '#eae406';
+      case 'extranjero':
+        return '#000';
       default:
-        return 'gray'; // Color predeterminado para roles no especificados
+        return ''; // Color predeterminado para roles no especificados, por defecto ninguno
     }
   }
 

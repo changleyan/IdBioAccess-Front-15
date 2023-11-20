@@ -46,7 +46,7 @@ export class CiudadanoDataService {
 
   transformarCiudadano(ciudadano: Ciudadano): CiudadanoDisplay {
     const transformedCiudadano: CiudadanoDisplay = {
-      foto: ciudadano.imagen_facil.foto || './assets/img/user-placeholder.png',
+      foto: ciudadano.imagen_facil.foto || './assets/img/user-placeholder.jpg',
       ci: ciudadano.carnetidentidad || '', // Puedes ajustar la lógica según tus necesidades
       name: `${ciudadano.primernombre} ${ciudadano.segundonombre || ''}`.trim(),
       apellidos: `${ciudadano.primerapellido} ${ciudadano.segundoapellido || ''}`.trim(),
