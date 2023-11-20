@@ -4,6 +4,7 @@ import {tap} from "rxjs";
 import {Ciudadano} from "../models/ciudadano.response.type";
 import {CiudadanoService} from "./ciudadano.service";
 import {LoadingService} from "./loading/loading.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class CiudadanoDataService {
   isLoading = true;
 
   constructor(private ciudadanoService: CiudadanoService,
+              private snackBar: MatSnackBar,
               private loadingService: LoadingService) { }
 
   public getCiudadanos(): void {
@@ -35,6 +37,7 @@ export class CiudadanoDataService {
         this.elemtData = data.results.map((ciudadano: any) => this.transformarCiudadano(ciudadano));
         this.isLoading = false;
         this.loadingService.setLoading(false);
+        this.showemptyResult();
       })
     ).subscribe();
   }
@@ -58,6 +61,14 @@ export class CiudadanoDataService {
       allData: ciudadano
     };
     return transformedCiudadano;
+  }
+
+  showemptyResult(){
+    if (this.elemtData.length === 0) {
+      this.snackBar.open('No se encontraron resultados con estos parámetros.', 'Cerrar', {
+        duration: 5000
+      });
+    }
   }
 
 
