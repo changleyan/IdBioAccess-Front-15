@@ -1,10 +1,9 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {
   GenericDisplayTableColumns, IconData,
   UserDisplay
 } from "@app/models/displayTableColumns";
 import iconModel, {rowModel} from "@app/common/IconData";
-import {CaptureModalComponent} from "@views/images/capture-modal/capture-modal.component";
 import {UserService} from "@app/services/user.service";
 import {tap, throwError} from "rxjs";
 import {UserFormComponent} from "@components/user/user-form/user-form.component";

@@ -44,7 +44,6 @@ export class CaptureModalComponent {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private dialog: MatDialog,
               private dialogRef: MatDialogRef<CaptureModalComponent>) {
-    console.log(this.data, 'data')
   }
 
   public ngOnInit(): void {

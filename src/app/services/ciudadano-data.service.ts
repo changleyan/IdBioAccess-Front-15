@@ -20,7 +20,6 @@ export class CiudadanoDataService {
     this.loadingService.setLoading(true);
     this.ciudadanoService.getCiudadano().pipe(
       tap(data => {
-        console.log('data', data);
         this.elemtData = data.results.map((ciudadano: any) => this.transformarCiudadano(ciudadano));
         this.isLoading = false;
         this.loadingService.setLoading(false);
