@@ -8,6 +8,7 @@ import {TablesComponent} from "@views/admin/tables/tables.component";
 import {AuthComponent} from "@app/layouts/auth/auth.component";
 import {LoginComponent} from "@views/auth/login/login.component";
 import {NgxPermissionsGuard} from "ngx-permissions";
+import {ADMIN, CAPTURADOR} from "@app/common/groups_roles";
 
 
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
     path: "admin",
     component: AdminComponent,
     canActivate: [NgxPermissionsGuard],
-    data: {permissions: {only: ['Admin']}}, // Ajusta el nombre del grupo según tu lógica
+    data: {permissions: {only: [ADMIN]}}, // Ajusta el nombre del grupo según tu lógica
     children: [
       {path: "dashboard", component: DashboardComponent},
       {path: "settings", component: SettingsComponent},
@@ -27,7 +28,7 @@ const routes: Routes = [
     path: "administracion",
     component: AdminComponent,
     canActivate: [NgxPermissionsGuard],
-    data: {permissions: {only: ['Admin']}}, // Ajusta el nombre del grupo según tu lógica
+    data: {permissions: {only: [ADMIN]}}, // Ajusta el nombre del grupo según tu lógica
     children: [
       {
         path: "usuarios",
@@ -44,7 +45,7 @@ const routes: Routes = [
     path: "imagenes",
     component: AdminComponent,
     canActivate: [NgxPermissionsGuard],
-    data: {permissions: {only: ['Captacion', 'Admin']}}, // Ajusta el nombre del grupo según tu lógica
+    data: {permissions: {only: [CAPTURADOR, ADMIN]}}, // Ajusta el nombre del grupo según tu lógica
     children: [
       {
         path: "captacion",

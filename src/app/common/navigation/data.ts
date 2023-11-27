@@ -1,11 +1,12 @@
 import {NavigationItem} from "../../Interfaces/navigation.types";
+import {ADMIN, CAPTURADOR} from "@app/common/groups_roles";
 
 export const defaultNavigation: NavigationItem[] = [
   {
     title: 'Imágenes',
     hidden: false,
     disabled: false,
-    permissions: ['Captacion', 'Admin'],
+    permissions: [CAPTURADOR, ADMIN],
     childrenItem: [
       {
         title: 'Captación',
@@ -13,7 +14,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Capturar imagenes',
         icon: 'camera_alt',
-        permissions: ['Captacion', 'Admin'],
+        permissions: [CAPTURADOR, ADMIN],
         link: '/imagenes/captacion'
       }
     ],
@@ -22,7 +23,7 @@ export const defaultNavigation: NavigationItem[] = [
     title: 'Solapín',
     hidden: true,
     disabled: false,
-    permissions: ['Captacion'],
+    permissions: [CAPTURADOR],
     childrenItem: [
       {
         title: 'Asociar',
@@ -30,7 +31,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'pool',
-        permissions: ['Captacion'],
+        permissions: [CAPTURADOR],
         link: '/admin/settings'
       }, {
         title: 'Aprobar',
@@ -38,7 +39,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'pool',
-        permissions: ['Captacion'],
+        permissions: [CAPTURADOR],
         link: '/admin/settings'
       }, {
         title: 'Activar',
@@ -46,7 +47,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'pool',
-        permissions: ['Captacion'],
+        permissions: [CAPTURADOR],
         link: '/admin/settings'
       }, {
         title: 'Anular',
@@ -54,7 +55,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'pool',
-        permissions: ['Captacion'],
+        permissions: [CAPTURADOR],
         link: '/admin/settings'
       },
     ],
@@ -63,7 +64,7 @@ export const defaultNavigation: NavigationItem[] = [
     title: 'Administración',
     hidden: false,
     disabled: false,
-    permissions: ['Admin'],
+    permissions: [ADMIN],
     childrenItem: [
       {
         title: 'Usuarios',
@@ -71,7 +72,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Gestionar usuarios',
         icon: 'group',
-        permissions: ['Admin'],
+        permissions: [ADMIN],
         link: '/administracion/usuarios'
       }, {
         title: 'Seguridad',
@@ -79,7 +80,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Gestionar permisos',
         icon: 'security',
-        permissions: ['Admin'],
+        permissions: [ADMIN],
         link: '/administracion/seguridad'
       }
     ],
@@ -88,7 +89,7 @@ export const defaultNavigation: NavigationItem[] = [
     title: 'General',
     hidden: true,
     disabled: false,
-    permissions: ['Admin'],
+    permissions: [ADMIN],
     childrenItem: [
       {
         title: 'Dashboard',
@@ -96,7 +97,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'analytics',
-        permissions: ['Admin'],
+        permissions: [ADMIN],
         link: '/admin/dashboard'
       }, {
         title: 'Settings',
@@ -104,7 +105,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'settings',
-        permissions: ['Admin'],
+        permissions: [ADMIN],
         link: '/admin/settings'
       }, {
         title: 'Tables',
@@ -112,7 +113,7 @@ export const defaultNavigation: NavigationItem[] = [
         disabled: false,
         tooltip: 'Acceso al dashboard',
         icon: 'table_chart',
-        permissions: ['Admin'],
+        permissions: [ADMIN],
         link: '/admin/tables'
       }
     ],
