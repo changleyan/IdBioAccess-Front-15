@@ -37,7 +37,7 @@
 
               <div class="thumbnail" *ngSwitchCase="'img'">
                 <!-- Lógica para manejar imágenes -->
-                <img [src]="row[column.dataKeyName]" [style.border]="'2px solid ' + getColorForRole('visitante')" alt="Imagen">
+                <img [src]="row[column.dataKeyName]" [style.border]="'2px solid ' + getColorForRole(row?.allData?.roluniversitario)" alt="Imagen">
               </div>
 
 
