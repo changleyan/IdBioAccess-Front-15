@@ -10,6 +10,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {ErrorDialogComponent} from "@components/dialog/dialog.component";
 import {HttpErrorResponse} from "@angular/common/http";
 import {LoadingService} from "@app/services/loading/loading.service";
+import {tap} from "rxjs";
 
 @Component({
   selector: 'app-user-form',
@@ -42,8 +43,8 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
     this.userForm = this.fb.group({
       username: ['', [Validators.required]],
-      first_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
-      last_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      first_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
+      last_name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
       password: ['', [Validators.required]],
       repeat_password: ['', [Validators.required]],
       ci: ['', [Validators.required]],
